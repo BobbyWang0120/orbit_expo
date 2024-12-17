@@ -1,6 +1,6 @@
 /**
  * 聊天历史记录列表项组件
- * 展示单条聊天历史的概要信息，包括标题、最后消息、时间等
+ * 展示单条聊天历史的概要信息，包括标题、目的地和时间等
  */
 
 import { Colors } from '@/constants/Colors';
@@ -17,20 +17,6 @@ interface ChatHistoryItemProps {
 }
 
 export function ChatHistoryItem({ chat, onPress }: ChatHistoryItemProps) {
-  // 获取状态对应的图标和颜色
-  const getStatusIcon = () => {
-    switch (chat.status) {
-      case 'completed':
-        return { name: 'checkmark.circle.fill', color: Colors.light.success };
-      case 'planning':
-        return { name: 'clock.fill', color: Colors.light.warning };
-      case 'cancelled':
-        return { name: 'xmark.circle.fill', color: Colors.light.error };
-    }
-  };
-
-  const statusIcon = getStatusIcon();
-
   return (
     <TouchableOpacity
       style={styles.container}
@@ -38,26 +24,21 @@ export function ChatHistoryItem({ chat, onPress }: ChatHistoryItemProps) {
       activeOpacity={0.7}
     >
       <View style={styles.content}>
-        <View style={styles.header}>
-          <Text style={styles.title}>{chat.title}</Text>
-          <IconSymbol
-            name={statusIcon.name}
-            size={20}
-            color={statusIcon.color}
-          />
-        </View>
-        
-        <Text style={styles.message} numberOfLines={2}>
-          {chat.lastMessage}
-        </Text>
+        <Text style={styles.title}>{chat.title}</Text>
         
         <View style={styles.footer}>
           <View style={styles.details}>
             {chat.destination && (
-              <Text style={styles.detail}>📍 {chat.destination}</Text>
+              <View style={styles.detailItem}>
+                <IconSymbol name="mappin" size={16} color={Colors.light.textSecondary} />
+                <Text style={styles.detail}>{chat.destination}</Text>
+              </View>
             )}
             {chat.duration && (
-              <Text style={styles.detail}>⏱ {chat.duration}</Text>
+              <View style={styles.detailItem}>
+                <IconSymbol name="clock" size={16} color={Colors.light.textSecondary} />
+                <Text style={styles.detail}>{chat.duration}</Text>
+              </View>
             )}
           </View>
           <Text style={styles.timestamp}>
@@ -83,39 +64,32 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   content: {
-    gap: 8,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    gap: 12,
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
     color: Colors.light.text,
   },
-  message: {
-    fontSize: 14,
-    color: Colors.light.textSecondary,
-    lineHeight: 20,
-  },
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 4,
+    alignItems: 'flex-end',
   },
   details: {
+    gap: 8,
+  },
+  detailItem: {
     flexDirection: 'row',
-    gap: 12,
+    alignItems: 'center',
+    gap: 4,
   },
   detail: {
-    fontSize: 12,
-    color: Colors.light.textLight,
+    fontSize: 14,
+    color: Colors.light.textSecondary,
   },
   timestamp: {
     fontSize: 12,
-    color: Colors.light.textLight,
+    color: Colors.light.textTertiary,
   },
 });
