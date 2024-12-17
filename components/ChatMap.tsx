@@ -3,9 +3,9 @@
  * 用于在聊天界面中显示地图
  */
 
-import { StyleSheet, View, Pressable } from 'react-native';
+import { StyleSheet, View, Pressable, Modal, Text, ScrollView } from 'react-native';
 import MapView, { Marker, Region } from 'react-native-maps';
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { Colors } from '@/constants/Colors';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import * as Haptics from 'expo-haptics';
@@ -13,6 +13,8 @@ import { mockMapLocations } from '@/constants/MockData';
 
 export function ChatMap() {
   const mapRef = useRef<MapView>(null);
+  const [showDayPicker, setShowDayPicker] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(1);
 
   // 计算所有标记点的边界和中心点
   const initialRegion = useMemo<Region>(() => {
@@ -57,6 +59,13 @@ export function ChatMap() {
     mapRef.current?.animateToRegion(initialRegion, 500); // 500ms的动画时长
   };
 
+  // 处理日期选择
+  const handleDaySelect = (day: number) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    setSelectedDay(day);
+    setShowDayPicker(false);
+  };
+
   return (
     <View style={styles.container}>
       <MapView
@@ -75,10 +84,28 @@ export function ChatMap() {
           />
         ))}
       </MapView>
+      
+      {/* 日期选择按钮 */}
+      <Pressable
+        style={({ pressed }) => [
+          styles.dayButton,
+          pressed && styles.buttonPressed,
+        ]}
+        onPress={() => setShowDayPicker(true)}
+      >
+        <IconSymbol
+          name="calendar"
+          size={24}
+          color={Colors.light.text}
+        />
+        <Text style={styles.dayText}>第{selectedDay}天</Text>
+      </Pressable>
+
+      {/* 回正按钮 */}
       <Pressable
         style={({ pressed }) => [
           styles.resetButton,
-          pressed && styles.resetButtonPressed,
+          pressed && styles.buttonPressed,
         ]}
         onPress={handleReset}
       >
@@ -88,6 +115,42 @@ export function ChatMap() {
           color={Colors.light.text}
         />
       </Pressable>
+
+      {/* 日期选择弹窗 */}
+      <Modal
+        visible={showDayPicker}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setShowDayPicker(false)}
+      >
+        <Pressable
+          style={styles.modalOverlay}
+          onPress={() => setShowDayPicker(false)}
+        >
+          <View style={styles.modalContent}>
+            <ScrollView>
+              {[1, 2, 3, 4, 5].map((day) => (
+                <Pressable
+                  key={day}
+                  style={({ pressed }) => [
+                    styles.dayOption,
+                    day === selectedDay && styles.selectedDayOption,
+                    pressed && styles.dayOptionPressed,
+                  ]}
+                  onPress={() => handleDaySelect(day)}
+                >
+                  <Text style={[
+                    styles.dayOptionText,
+                    day === selectedDay && styles.selectedDayOptionText
+                  ]}>
+                    第{day}天
+                  </Text>
+                </Pressable>
+              ))}
+            </ScrollView>
+          </View>
+        </Pressable>
+      </Modal>
     </View>
   );
 }
@@ -100,6 +163,31 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '100%',
+  },
+  dayButton: {
+    position: 'absolute',
+    right: 16,
+    bottom: 72,
+    height: 44,
+    paddingHorizontal: 16,
+    borderRadius: 22,
+    backgroundColor: Colors.light.background,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  dayText: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: Colors.light.text,
   },
   resetButton: {
     position: 'absolute',
@@ -120,8 +208,52 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  resetButtonPressed: {
+  buttonPressed: {
     opacity: 0.7,
     backgroundColor: Colors.light.messageBubble,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: '80%',
+    maxHeight: '60%',
+    backgroundColor: Colors.light.background,
+    borderRadius: 16,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  dayOption: {
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+    marginBottom: 8,
+  },
+  selectedDayOption: {
+    backgroundColor: Colors.light.tint,
+  },
+  dayOptionPressed: {
+    opacity: 0.7,
+    backgroundColor: Colors.light.messageBubble,
+  },
+  dayOptionText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: Colors.light.text,
+    textAlign: 'center',
+  },
+  selectedDayOptionText: {
+    color: Colors.light.background,
+    fontWeight: '600',
   },
 });
