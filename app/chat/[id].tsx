@@ -25,7 +25,7 @@ function BackButton() {
     >
       <IconSymbol
         name="chevron.left"
-        size={28}
+        size={24}
         color={Colors.light.text}
       />
     </Pressable>
