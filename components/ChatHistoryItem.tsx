@@ -19,6 +19,7 @@ import {
   Dimensions
 } from 'react-native';
 import { IconSymbol } from './ui/IconSymbol';
+import * as Haptics from 'expo-haptics';
 
 interface ChatHistoryItemProps {
   chat: ChatHistory;
@@ -27,13 +28,13 @@ interface ChatHistoryItemProps {
 }
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const DELETE_BUTTON_WIDTH = 80;
-const SWIPE_THRESHOLD = DELETE_BUTTON_WIDTH / 2;
+const DELETE_THRESHOLD = SCREEN_WIDTH * 0.3; // 30% 屏幕宽度为删除阈值
+const HAPTIC_THRESHOLD = DELETE_THRESHOLD * 0.6; // 60% 删除阈值时触发震动
 
 export function ChatHistoryItem({ chat, onPress, onDelete }: ChatHistoryItemProps) {
-  const [isDeleting, setIsDeleting] = useState(false);
   const pan = useRef(new Animated.ValueXY()).current;
-  const deleteOpacity = useRef(new Animated.Value(0)).current;
+  const [hasTriggeredHaptic, setHasTriggeredHaptic] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -42,6 +43,8 @@ export function ChatHistoryItem({ chat, onPress, onDelete }: ChatHistoryItemProp
         return Math.abs(gestureState.dx) > Math.abs(gestureState.dy * 2);
       },
       onPanResponderGrant: () => {
+        setIsDragging(true);
+        setHasTriggeredHaptic(false);
         pan.setOffset({
           x: pan.x._value,
           y: 0
@@ -49,79 +52,56 @@ export function ChatHistoryItem({ chat, onPress, onDelete }: ChatHistoryItemProp
         pan.setValue({ x: 0, y: 0 });
       },
       onPanResponderMove: (_, gestureState) => {
-        // 限制只能向左滑动，且最大滑动距离为删除按钮宽度
-        const x = Math.min(0, Math.max(-DELETE_BUTTON_WIDTH, gestureState.dx));
+        // 只允许向左滑动
+        const x = Math.min(0, gestureState.dx);
         pan.setValue({ x, y: 0 });
-        
-        // 根据滑动距离设置删除按钮的透明度
-        const opacity = Math.min(1, Math.abs(x) / DELETE_BUTTON_WIDTH);
-        deleteOpacity.setValue(opacity);
+
+        // 当滑动距离达到震动阈值时触发震动
+        if (!hasTriggeredHaptic && Math.abs(x) > HAPTIC_THRESHOLD) {
+          setHasTriggeredHaptic(true);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        }
       },
       onPanResponderRelease: (_, gestureState) => {
+        setIsDragging(false);
         pan.flattenOffset();
-        
-        // 判断是否应该展开删除按钮
-        const shouldOpen = -gestureState.dx > SWIPE_THRESHOLD;
-        
-        Animated.spring(pan, {
-          toValue: { x: shouldOpen ? -DELETE_BUTTON_WIDTH : 0, y: 0 },
-          useNativeDriver: false,
-          bounciness: 8
-        }).start();
-        
-        Animated.timing(deleteOpacity, {
-          toValue: shouldOpen ? 1 : 0,
-          duration: 200,
-          useNativeDriver: false
-        }).start();
-        
-        setIsDeleting(shouldOpen);
+
+        if (Math.abs(gestureState.dx) > DELETE_THRESHOLD) {
+          // 触发删除动画
+          Animated.timing(pan, {
+            toValue: { x: -SCREEN_WIDTH, y: 0 },
+            duration: 250,
+            useNativeDriver: false
+          }).start(() => {
+            onDelete(chat.id);
+          });
+        } else {
+          // 回弹动画
+          Animated.spring(pan, {
+            toValue: { x: 0, y: 0 },
+            useNativeDriver: false,
+            bounciness: 8
+          }).start();
+        }
       }
     })
   ).current;
 
-  const handleDelete = () => {
-    // 执行删除动画
-    Animated.parallel([
-      Animated.timing(pan, {
-        toValue: { x: -SCREEN_WIDTH, y: 0 },
-        duration: 250,
-        useNativeDriver: false
-      }),
-      Animated.timing(deleteOpacity, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: false
-      })
-    ]).start(() => {
-      onDelete(chat.id);
-    });
-  };
-
   return (
     <View style={styles.wrapper}>
-      {/* 删除按钮 */}
+      {/* 背景层 - 显示删除状态 */}
       <Animated.View
         style={[
-          styles.deleteButton,
+          styles.deleteBackground,
           {
-            opacity: deleteOpacity,
-            transform: [{
-              translateX: pan.x.interpolate({
-                inputRange: [-DELETE_BUTTON_WIDTH, 0],
-                outputRange: [0, DELETE_BUTTON_WIDTH]
-              })
-            }]
+            opacity: pan.x.interpolate({
+              inputRange: [-DELETE_THRESHOLD, 0],
+              outputRange: [1, 0],
+            })
           }
         ]}
       >
-        <TouchableOpacity
-          style={styles.deleteButtonInner}
-          onPress={handleDelete}
-          disabled={!isDeleting}
-        >
-          <IconSymbol name="trash" size={24} color={Colors.light.background} />
-        </TouchableOpacity>
+        <IconSymbol name="trash" size={24} color={Colors.light.background} />
       </Animated.View>
 
       {/* 卡片内容 */}
@@ -134,30 +114,36 @@ export function ChatHistoryItem({ chat, onPress, onDelete }: ChatHistoryItemProp
         ]}
         {...panResponder.panHandlers}
       >
-        <View style={styles.leftBorder} />
-        <View style={styles.content}>
-          <View style={styles.header}>
-            <Text style={styles.title} numberOfLines={1}>{chat.title}</Text>
-            <Text style={styles.timestamp}>
-              {format(chat.timestamp, 'MM月dd日', { locale: zhCN })}
-            </Text>
+        <TouchableOpacity
+          style={styles.touchable}
+          onPress={() => !isDragging && onPress(chat)}
+          activeOpacity={0.7}
+        >
+          <View style={styles.leftBorder} />
+          <View style={styles.content}>
+            <View style={styles.header}>
+              <Text style={styles.title} numberOfLines={1}>{chat.title}</Text>
+              <Text style={styles.timestamp}>
+                {format(chat.timestamp, 'MM月dd日', { locale: zhCN })}
+              </Text>
+            </View>
+            
+            <View style={styles.details}>
+              {chat.destination && (
+                <View style={styles.detailItem}>
+                  <IconSymbol name="mappin" size={14} color={Colors.light.textSecondary} />
+                  <Text style={styles.detail}>{chat.destination}</Text>
+                </View>
+              )}
+              {chat.duration && (
+                <View style={styles.detailItem}>
+                  <IconSymbol name="clock" size={14} color={Colors.light.textSecondary} />
+                  <Text style={styles.detail}>{chat.duration}</Text>
+                </View>
+              )}
+            </View>
           </View>
-          
-          <View style={styles.details}>
-            {chat.destination && (
-              <View style={styles.detailItem}>
-                <IconSymbol name="mappin" size={14} color={Colors.light.textSecondary} />
-                <Text style={styles.detail}>{chat.destination}</Text>
-              </View>
-            )}
-            {chat.duration && (
-              <View style={styles.detailItem}>
-                <IconSymbol name="clock" size={14} color={Colors.light.textSecondary} />
-                <Text style={styles.detail}>{chat.duration}</Text>
-              </View>
-            )}
-          </View>
-        </View>
+        </TouchableOpacity>
       </Animated.View>
     </View>
   );
@@ -168,6 +154,17 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginHorizontal: 16,
     marginVertical: 6,
+  },
+  deleteBackground: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: Colors.light.error,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   container: {
     flexDirection: 'row',
@@ -180,22 +177,9 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  deleteButton: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    width: DELETE_BUTTON_WIDTH,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  deleteButtonInner: {
-    width: DELETE_BUTTON_WIDTH - 16,
-    height: '100%',
-    backgroundColor: Colors.light.error,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+  touchable: {
+    flex: 1,
+    flexDirection: 'row',
   },
   leftBorder: {
     width: 4,
