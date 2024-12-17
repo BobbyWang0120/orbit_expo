@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   resetButton: {
     position: 'absolute',
     right: 16,
-    bottom: 16,
+    bottom: 72, // 调整到日期按钮的位置
     width: 44,
     height: 44,
     borderRadius: 22,
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   dayButton: {
     position: 'absolute',
     right: 16,
-    bottom: 72,
+    bottom: 16, // 调整到回正按钮的位置
     height: 44,
     paddingHorizontal: 16,
     borderRadius: 22,
