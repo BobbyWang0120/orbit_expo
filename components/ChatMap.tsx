@@ -5,21 +5,29 @@
 
 import { StyleSheet, View, Pressable, Modal, Text, ScrollView } from 'react-native';
 import MapView, { Marker, Region } from 'react-native-maps';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { Colors } from '@/constants/Colors';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import * as Haptics from 'expo-haptics';
-import { mockMapLocations } from '@/constants/MockData';
+import { mockMapLocationsByDay } from '@/constants/MockData';
 
 export function ChatMap() {
   const mapRef = useRef<MapView>(null);
   const [showDayPicker, setShowDayPicker] = useState(false);
   const [selectedDay, setSelectedDay] = useState(1);
+  const currentLocations = mockMapLocationsByDay[selectedDay];
 
   // 计算所有标记点的边界和中心点
   const initialRegion = useMemo<Region>(() => {
+    if (!currentLocations?.length) return {
+      latitude: 35.6762,
+      longitude: 139.6503,
+      latitudeDelta: 0.1,
+      longitudeDelta: 0.1,
+    };
+
     // 找出所有坐标的最大最小值
-    const bounds = mockMapLocations.reduce(
+    const bounds = currentLocations.reduce(
       (acc, location) => {
         return {
           minLat: Math.min(acc.minLat, location.coordinate.latitude),
@@ -29,10 +37,10 @@ export function ChatMap() {
         };
       },
       {
-        minLat: mockMapLocations[0].coordinate.latitude,
-        maxLat: mockMapLocations[0].coordinate.latitude,
-        minLng: mockMapLocations[0].coordinate.longitude,
-        maxLng: mockMapLocations[0].coordinate.longitude,
+        minLat: currentLocations[0].coordinate.latitude,
+        maxLat: currentLocations[0].coordinate.latitude,
+        minLng: currentLocations[0].coordinate.longitude,
+        maxLng: currentLocations[0].coordinate.longitude,
       }
     );
 
@@ -42,21 +50,26 @@ export function ChatMap() {
 
     // 计算需要显示的范围（添加一些边距）
     const padding = 1.1; // 10% 的边距
-    const latDelta = (bounds.maxLat - bounds.minLat) * padding;
-    const lngDelta = (bounds.maxLng - bounds.minLng) * padding;
+    const latDelta = Math.max((bounds.maxLat - bounds.minLat) * padding, 0.02);
+    const lngDelta = Math.max((bounds.maxLng - bounds.minLng) * padding, 0.02);
 
     return {
       latitude: centerLat,
       longitude: centerLng,
-      latitudeDelta: Math.max(latDelta, 0.02), // 设置最小缩放级别
-      longitudeDelta: Math.max(lngDelta, 0.02),
+      latitudeDelta: latDelta,
+      longitudeDelta: lngDelta,
     };
-  }, []);
+  }, [currentLocations]);
+
+  // 当选中的天数改变时，自动调整地图视角
+  useEffect(() => {
+    mapRef.current?.animateToRegion(initialRegion, 500);
+  }, [selectedDay, initialRegion]);
 
   // 处理回正按钮点击
   const handleReset = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    mapRef.current?.animateToRegion(initialRegion, 500); // 500ms的动画时长
+    mapRef.current?.animateToRegion(initialRegion, 500);
   };
 
   // 处理日期选择
@@ -74,7 +87,7 @@ export function ChatMap() {
         initialRegion={initialRegion}
         rotateEnabled={false}
       >
-        {mockMapLocations.map((location, index) => (
+        {currentLocations?.map((location, index) => (
           <Marker
             key={index}
             coordinate={location.coordinate}
@@ -85,6 +98,21 @@ export function ChatMap() {
         ))}
       </MapView>
       
+      {/* 回正按钮 */}
+      <Pressable
+        style={({ pressed }) => [
+          styles.resetButton,
+          pressed && styles.buttonPressed,
+        ]}
+        onPress={handleReset}
+      >
+        <IconSymbol
+          name="scope"
+          size={24}
+          color={Colors.light.text}
+        />
+      </Pressable>
+
       {/* 日期选择按钮 */}
       <Pressable
         style={({ pressed }) => [
@@ -99,21 +127,6 @@ export function ChatMap() {
           color={Colors.light.text}
         />
         <Text style={styles.dayText}>第{selectedDay}天</Text>
-      </Pressable>
-
-      {/* 回正按钮 */}
-      <Pressable
-        style={({ pressed }) => [
-          styles.resetButton,
-          pressed && styles.buttonPressed,
-        ]}
-        onPress={handleReset}
-      >
-        <IconSymbol
-          name="scope"
-          size={24}
-          color={Colors.light.text}
-        />
       </Pressable>
 
       {/* 日期选择弹窗 */}
@@ -164,6 +177,25 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  resetButton: {
+    position: 'absolute',
+    right: 16,
+    bottom: 16,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: Colors.light.background,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
   dayButton: {
     position: 'absolute',
     right: 16,
@@ -188,25 +220,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
     color: Colors.light.text,
-  },
-  resetButton: {
-    position: 'absolute',
-    right: 16,
-    bottom: 16,
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: Colors.light.background,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   buttonPressed: {
     opacity: 0.7,
