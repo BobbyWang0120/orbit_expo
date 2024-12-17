@@ -3,10 +3,12 @@
  * 用于在聊天界面中显示地图
  */
 
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Pressable } from 'react-native';
 import MapView, { Marker, Region } from 'react-native-maps';
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { Colors } from '@/constants/Colors';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import * as Haptics from 'expo-haptics';
 
 // 定义景点位置数据
 const locations = [
@@ -78,6 +80,8 @@ const locations = [
 ];
 
 export function ChatMap() {
+  const mapRef = useRef<MapView>(null);
+
   // 计算所有标记点的边界和中心点
   const initialRegion = useMemo<Region>(() => {
     // 找出所有坐标的最大最小值
@@ -115,9 +119,16 @@ export function ChatMap() {
     };
   }, []);
 
+  // 处理回正按钮点击
+  const handleReset = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    mapRef.current?.animateToRegion(initialRegion, 500); // 500ms的动画时长
+  };
+
   return (
     <View style={styles.container}>
       <MapView
+        ref={mapRef}
         style={styles.map}
         initialRegion={initialRegion}
         rotateEnabled={false}
@@ -132,6 +143,19 @@ export function ChatMap() {
           />
         ))}
       </MapView>
+      <Pressable
+        style={({ pressed }) => [
+          styles.resetButton,
+          pressed && styles.resetButtonPressed,
+        ]}
+        onPress={handleReset}
+      >
+        <IconSymbol
+          name="location"
+          size={24}
+          color={Colors.light.text}
+        />
+      </Pressable>
     </View>
   );
 }
@@ -144,5 +168,28 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '100%',
+  },
+  resetButton: {
+    position: 'absolute',
+    right: 16,
+    bottom: 16,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: Colors.light.background,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  resetButtonPressed: {
+    opacity: 0.7,
+    backgroundColor: Colors.light.messageBubble,
   },
 });
