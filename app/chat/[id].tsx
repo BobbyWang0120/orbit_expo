@@ -8,9 +8,29 @@ import { ChatMessage } from '@/components/ChatMessage';
 import { Colors } from '@/constants/Colors';
 import { mockChatHistories, mockTokyoMessages } from '@/constants/MockData';
 import { ChatMessage as ChatMessageType } from '@/types/chat';
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import { Stack, router, useLocalSearchParams } from 'expo-router';
 import React, { useRef, useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+
+// 自定义返回按钮组件
+function BackButton() {
+  return (
+    <Pressable
+      onPress={() => router.back()}
+      style={({ pressed }) => [
+        styles.backButton,
+        pressed && styles.backButtonPressed,
+      ]}
+    >
+      <IconSymbol
+        name="chevron.left"
+        size={28}
+        color={Colors.light.text}
+      />
+    </Pressable>
+  );
+}
 
 export default function ChatScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -63,6 +83,8 @@ export default function ChatScreen() {
             backgroundColor: Colors.light.background,
           },
           headerShadowVisible: false,
+          headerLeft: () => <BackButton />,
+          headerTitleStyle: styles.headerTitle,
         }}
       />
       <View style={styles.container}>
@@ -89,5 +111,22 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingVertical: 16,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    marginLeft: -8,
+  },
+  backButtonPressed: {
+    opacity: 0.7,
+    backgroundColor: Colors.light.messageBubble,
+  },
+  headerTitle: {
+    fontSize: 17,
+    fontWeight: '600',
+    color: Colors.light.text,
   },
 });
