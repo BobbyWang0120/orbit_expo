@@ -19,13 +19,35 @@ function BackButton() {
     <Pressable
       onPress={() => router.back()}
       style={({ pressed }) => [
-        styles.backButton,
-        pressed && styles.backButtonPressed,
+        styles.iconButton,
+        pressed && styles.iconButtonPressed,
       ]}
     >
       <IconSymbol
         name="chevron.left"
         size={28}
+        color={Colors.light.text}
+      />
+    </Pressable>
+  );
+}
+
+// 地图按钮组件
+function MapButton() {
+  return (
+    <Pressable
+      onPress={() => {
+        // TODO: 处理地图按钮点击
+        console.log('Map button pressed');
+      }}
+      style={({ pressed }) => [
+        styles.iconButton,
+        pressed && styles.iconButtonPressed,
+      ]}
+    >
+      <IconSymbol
+        name="map"
+        size={24}
         color={Colors.light.text}
       />
     </Pressable>
@@ -84,6 +106,7 @@ export default function ChatScreen() {
           },
           headerShadowVisible: false,
           headerLeft: () => <BackButton />,
+          headerRight: () => <MapButton />,
           headerTitleStyle: styles.headerTitle,
         }}
       />
@@ -112,15 +135,15 @@ const styles = StyleSheet.create({
   listContent: {
     paddingVertical: 16,
   },
-  backButton: {
+  iconButton: {
     width: 40,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
-    marginLeft: -8,
+    marginHorizontal: -8,
   },
-  backButtonPressed: {
+  iconButtonPressed: {
     opacity: 0.7,
     backgroundColor: Colors.light.messageBubble,
   },
