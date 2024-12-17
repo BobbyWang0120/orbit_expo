@@ -23,27 +23,28 @@ export function ChatHistoryItem({ chat, onPress }: ChatHistoryItemProps) {
       onPress={() => onPress(chat)}
       activeOpacity={0.7}
     >
+      <View style={styles.leftBorder} />
       <View style={styles.content}>
-        <Text style={styles.title}>{chat.title}</Text>
-        
-        <View style={styles.footer}>
-          <View style={styles.details}>
-            {chat.destination && (
-              <View style={styles.detailItem}>
-                <IconSymbol name="mappin" size={16} color={Colors.light.textSecondary} />
-                <Text style={styles.detail}>{chat.destination}</Text>
-              </View>
-            )}
-            {chat.duration && (
-              <View style={styles.detailItem}>
-                <IconSymbol name="clock" size={16} color={Colors.light.textSecondary} />
-                <Text style={styles.detail}>{chat.duration}</Text>
-              </View>
-            )}
-          </View>
+        <View style={styles.header}>
+          <Text style={styles.title} numberOfLines={1}>{chat.title}</Text>
           <Text style={styles.timestamp}>
-            {format(chat.timestamp, 'MM月dd日 HH:mm', { locale: zhCN })}
+            {format(chat.timestamp, 'MM月dd日', { locale: zhCN })}
           </Text>
+        </View>
+        
+        <View style={styles.details}>
+          {chat.destination && (
+            <View style={styles.detailItem}>
+              <IconSymbol name="mappin" size={14} color={Colors.light.textSecondary} />
+              <Text style={styles.detail}>{chat.destination}</Text>
+            </View>
+          )}
+          {chat.duration && (
+            <View style={styles.detailItem}>
+              <IconSymbol name="clock" size={14} color={Colors.light.textSecondary} />
+              <Text style={styles.detail}>{chat.duration}</Text>
+            </View>
+          )}
         </View>
       </View>
     </TouchableOpacity>
@@ -52,32 +53,43 @@ export function ChatHistoryItem({ chat, onPress }: ChatHistoryItemProps) {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     backgroundColor: Colors.light.card,
-    borderRadius: 12,
     marginHorizontal: 16,
-    marginVertical: 8,
-    padding: 16,
+    marginVertical: 6,
+    borderRadius: 10,
+    overflow: 'hidden',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  leftBorder: {
+    width: 4,
+    backgroundColor: Colors.light.primary,
+    opacity: 0.8,
   },
   content: {
-    gap: 12,
+    flex: 1,
+    padding: 12,
+    gap: 6,
   },
-  title: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: Colors.light.text,
-  },
-  footer: {
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    alignItems: 'center',
+  },
+  title: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '600',
+    color: Colors.light.text,
+    marginRight: 8,
   },
   details: {
-    gap: 8,
+    flexDirection: 'row',
+    gap: 16,
   },
   detailItem: {
     flexDirection: 'row',
@@ -85,11 +97,11 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   detail: {
-    fontSize: 14,
+    fontSize: 13,
     color: Colors.light.textSecondary,
   },
   timestamp: {
     fontSize: 12,
-    color: Colors.light.textTertiary,
+    color: Colors.light.textLight,
   },
 });
