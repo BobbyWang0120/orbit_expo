@@ -1,10 +1,11 @@
 /**
  * 聊天详情页面
- * 显示与AI的对话内容
+ * 显示与AI的对话内容和地图
  */
 
 import { ChatInput } from '@/components/ChatInput';
 import { ChatMessage } from '@/components/ChatMessage';
+import { ChatMap } from '@/components/ChatMap';
 import { Colors } from '@/constants/Colors';
 import { mockChatHistories, mockTokyoMessages } from '@/constants/MockData';
 import { ChatMessage as ChatMessageType } from '@/types/chat';
@@ -32,21 +33,18 @@ function BackButton() {
   );
 }
 
-// 地图按钮组件
-function MapButton() {
+// 切换按钮组件
+function ToggleButton({ showMap, onPress }: { showMap: boolean; onPress: () => void }) {
   return (
     <Pressable
-      onPress={() => {
-        // TODO: 处理地图按钮点击
-        console.log('Map button pressed');
-      }}
+      onPress={onPress}
       style={({ pressed }) => [
         styles.iconButton,
         pressed && styles.iconButtonPressed,
       ]}
     >
       <IconSymbol
-        name="map"
+        name={showMap ? "chat" : "map"}
         size={24}
         color={Colors.light.text}
       />
@@ -57,6 +55,7 @@ function MapButton() {
 export default function ChatScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [messages, setMessages] = useState<ChatMessageType[]>(mockTokyoMessages);
+  const [showMap, setShowMap] = useState(false);
   const flatListRef = useRef<FlatList>(null);
   
   // 获取聊天历史记录的标题
@@ -106,21 +105,32 @@ export default function ChatScreen() {
           },
           headerShadowVisible: false,
           headerLeft: () => <BackButton />,
-          headerRight: () => <MapButton />,
+          headerRight: () => (
+            <ToggleButton
+              showMap={showMap}
+              onPress={() => setShowMap(!showMap)}
+            />
+          ),
           headerTitleStyle: styles.headerTitle,
         }}
       />
       <View style={styles.container}>
-        <FlatList
-          ref={flatListRef}
-          data={messages}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <ChatMessage message={item} />}
-          contentContainerStyle={styles.listContent}
-          onLayout={() => {
-            flatListRef.current?.scrollToEnd({ animated: false });
-          }}
-        />
+        <View style={styles.content}>
+          {showMap ? (
+            <ChatMap />
+          ) : (
+            <FlatList
+              ref={flatListRef}
+              data={messages}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => <ChatMessage message={item} />}
+              contentContainerStyle={styles.listContent}
+              onLayout={() => {
+                flatListRef.current?.scrollToEnd({ animated: false });
+              }}
+            />
+          )}
+        </View>
         <ChatInput onSend={handleSend} />
       </View>
     </>
@@ -131,6 +141,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.light.background,
+  },
+  content: {
+    flex: 1,
   },
   listContent: {
     paddingVertical: 16,
