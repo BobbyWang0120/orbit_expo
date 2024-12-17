@@ -13,8 +13,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 export default function HomeScreen() {
   // 处理聊天记录点击事件
   const handleChatPress = (chat: ChatHistory) => {
-    // TODO: 实现跳转到聊天详情页面
-    console.log('Chat pressed:', chat.id);
+    router.push(`/chat/${chat.id}`);
   };
 
   return (

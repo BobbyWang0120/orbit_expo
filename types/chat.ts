@@ -11,3 +11,26 @@ export interface ChatHistory {
   duration?: string;      // 行程时长
   status: 'planning' | 'completed' | 'cancelled';  // 规划状态
 }
+
+export interface ChatMessage {
+  id: string;
+  content: string;       // 消息内容
+  timestamp: Date;       // 发送时间
+  sender: 'user' | 'ai'; // 发送者
+  type?: 'text' | 'location' | 'itinerary'; // 消息类型
+  metadata?: {           // 额外的消息数据
+    locations?: Array<{
+      name: string;
+      description?: string;
+      coordinates?: [number, number]; // [经度, 纬度]
+    }>;
+    itinerary?: Array<{
+      day: number;
+      activities: Array<{
+        time: string;
+        description: string;
+        location?: string;
+      }>;
+    }>;
+  };
+}
