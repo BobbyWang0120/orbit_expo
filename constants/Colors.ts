@@ -12,6 +12,7 @@ const dark = '#484848';        // 主要文字颜色
 const grey = '#767676';        // 次要文字颜色
 const lightGrey = '#EBEBEB';   // 边框、分割线颜色
 const white = '#FFFFFF';       // 背景色
+const messageBubble = '#F0F0F0'; // AI消息气泡背景色
 
 export const Colors = {
   light: {
@@ -20,6 +21,7 @@ export const Colors = {
     secondary: secondary,      // 次要主题色，用于辅助强调
     background: white,         // 页面背景色
     card: white,              // 卡片背景色
+    messageBubble: messageBubble, // AI消息气泡背景色
     
     // 文字颜色
     text: dark,               // 主要文字
@@ -51,6 +53,7 @@ export const Colors = {
     secondary: '#1FBFB8',     // 深色模式下的次要主题色
     background: '#1A1A1A',    // 深色背景
     card: '#2D2D2D',         // 深色卡片背景
+    messageBubble: '#2A2A2A', // AI消息气泡背景色
     
     // 文字颜色
     text: '#F7F7F7',         // 主要文字

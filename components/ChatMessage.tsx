@@ -5,8 +5,6 @@
 
 import { Colors } from '@/constants/Colors';
 import { ChatMessage as ChatMessageType } from '@/types/chat';
-import { format } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -90,9 +88,6 @@ export function ChatMessage({ message }: ChatMessageProps) {
         </Text>
         {renderItinerary()}
         {renderLocation()}
-        <Text style={styles.timestamp}>
-          {format(message.timestamp, 'HH:mm', { locale: zhCN })}
-        </Text>
       </View>
     </View>
   );
@@ -113,9 +108,14 @@ const styles = StyleSheet.create({
     maxWidth: '80%',
     padding: 12,
     borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
   },
   aiBubble: {
-    backgroundColor: Colors.light.card,
+    backgroundColor: Colors.light.messageBubble,
     borderTopLeftRadius: 4,
   },
   userBubble: {
@@ -131,12 +131,6 @@ const styles = StyleSheet.create({
   },
   userText: {
     color: Colors.light.background,
-  },
-  timestamp: {
-    fontSize: 12,
-    color: Colors.light.textLight,
-    marginTop: 4,
-    alignSelf: 'flex-end',
   },
   itinerary: {
     marginTop: 8,
