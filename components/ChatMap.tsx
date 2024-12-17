@@ -4,8 +4,8 @@
  */
 
 import { StyleSheet, View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
-import React from 'react';
+import MapView, { Marker, Region } from 'react-native-maps';
+import React, { useMemo } from 'react';
 import { Colors } from '@/constants/Colors';
 
 // 定义景点位置数据
@@ -78,13 +78,42 @@ const locations = [
 ];
 
 export function ChatMap() {
-  // 默认显示东京市中心
-  const initialRegion = {
-    latitude: 35.6762,
-    longitude: 139.6503,
-    latitudeDelta: 0.15,  // 调整缩放级别以显示更多景点
-    longitudeDelta: 0.15,
-  };
+  // 计算所有标记点的边界和中心点
+  const initialRegion = useMemo<Region>(() => {
+    // 找出所有坐标的最大最小值
+    const bounds = locations.reduce(
+      (acc, location) => {
+        return {
+          minLat: Math.min(acc.minLat, location.coordinate.latitude),
+          maxLat: Math.max(acc.maxLat, location.coordinate.latitude),
+          minLng: Math.min(acc.minLng, location.coordinate.longitude),
+          maxLng: Math.max(acc.maxLng, location.coordinate.longitude),
+        };
+      },
+      {
+        minLat: locations[0].coordinate.latitude,
+        maxLat: locations[0].coordinate.latitude,
+        minLng: locations[0].coordinate.longitude,
+        maxLng: locations[0].coordinate.longitude,
+      }
+    );
+
+    // 计算中心点
+    const centerLat = (bounds.minLat + bounds.maxLat) / 2;
+    const centerLng = (bounds.minLng + bounds.maxLng) / 2;
+
+    // 计算需要显示的范围（添加一些边距）
+    const padding = 1.1; // 10% 的边距
+    const latDelta = (bounds.maxLat - bounds.minLat) * padding;
+    const lngDelta = (bounds.maxLng - bounds.minLng) * padding;
+
+    return {
+      latitude: centerLat,
+      longitude: centerLng,
+      latitudeDelta: Math.max(latDelta, 0.02), // 设置最小缩放级别
+      longitudeDelta: Math.max(lngDelta, 0.02),
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
