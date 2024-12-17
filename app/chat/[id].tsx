@@ -44,7 +44,7 @@ function ToggleButton({ showMap, onPress }: { showMap: boolean; onPress: () => v
       ]}
     >
       <IconSymbol
-        name={showMap ? "chat" : "map"}
+        name={showMap ? "message" : "map"}
         size={24}
         color={Colors.light.text}
       />
