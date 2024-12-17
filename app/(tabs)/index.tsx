@@ -7,24 +7,34 @@ import { Colors } from '@/constants/Colors';
 import { mockChatHistories } from '@/constants/MockData';
 import { ChatHistory } from '@/types/chat';
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
+import * as Haptics from 'expo-haptics';
 
 export default function HomeScreen() {
+  const [chatHistories, setChatHistories] = useState<ChatHistory[]>(mockChatHistories);
+
   // 处理聊天记录点击事件
   const handleChatPress = (chat: ChatHistory) => {
     router.push(`/chat/${chat.id}`);
   };
 
+  // 处理删除聊天记录
+  const handleDelete = (chatId: string) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    setChatHistories(prev => prev.filter(chat => chat.id !== chatId));
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={mockChatHistories}
+        data={chatHistories}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <ChatHistoryItem
             chat={item}
             onPress={handleChatPress}
+            onDelete={handleDelete}
           />
         )}
         contentContainerStyle={styles.listContent}
