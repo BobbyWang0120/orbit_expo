@@ -8,7 +8,7 @@ import { Colors } from '@/constants/Colors';
 import { ChatHistory } from '@/types/chat';
 import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -25,22 +25,32 @@ interface ChatHistoryItemProps {
   chat: ChatHistory;
   onPress: (chat: ChatHistory) => void;
   onDelete: (chatId: string) => void;
+  onSwipeStateChange?: (isActive: boolean) => void;
 }
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const DELETE_THRESHOLD = SCREEN_WIDTH * 0.3; // 30% 屏幕宽度为删除阈值
 const HAPTIC_THRESHOLD = DELETE_THRESHOLD * 0.6; // 60% 删除阈值时触发震动
 
-export function ChatHistoryItem({ chat, onPress, onDelete }: ChatHistoryItemProps) {
+export function ChatHistoryItem({ chat, onPress, onDelete, onSwipeStateChange }: ChatHistoryItemProps) {
   const pan = useRef(new Animated.ValueXY()).current;
   const [hasTriggeredHaptic, setHasTriggeredHaptic] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+
+  // 当滑动状态改变时通知父组件
+  useEffect(() => {
+    onSwipeStateChange?.(isDragging);
+  }, [isDragging, onSwipeStateChange]);
 
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: (_, gestureState) => {
         // 只响应水平滑动
-        return Math.abs(gestureState.dx) > Math.abs(gestureState.dy * 2);
+        const isHorizontalSwipe = Math.abs(gestureState.dx) > Math.abs(gestureState.dy * 2);
+        if (isHorizontalSwipe) {
+          onSwipeStateChange?.(true);
+        }
+        return isHorizontalSwipe;
       },
       onPanResponderGrant: () => {
         setIsDragging(true);
@@ -64,6 +74,7 @@ export function ChatHistoryItem({ chat, onPress, onDelete }: ChatHistoryItemProp
       },
       onPanResponderRelease: (_, gestureState) => {
         setIsDragging(false);
+        onSwipeStateChange?.(false);
         pan.flattenOffset();
 
         if (Math.abs(gestureState.dx) > DELETE_THRESHOLD) {
@@ -83,6 +94,16 @@ export function ChatHistoryItem({ chat, onPress, onDelete }: ChatHistoryItemProp
             bounciness: 8
           }).start();
         }
+      },
+      onPanResponderTerminate: () => {
+        setIsDragging(false);
+        onSwipeStateChange?.(false);
+        // 回弹动画
+        Animated.spring(pan, {
+          toValue: { x: 0, y: 0 },
+          useNativeDriver: false,
+          bounciness: 8
+        }).start();
       }
     })
   ).current;

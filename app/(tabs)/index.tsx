@@ -1,45 +1,54 @@
 /**
- * 主页面：展示旅行规划的聊天历史记录
+ * 首页组件
+ * 展示聊天历史列表，支持创建新的聊天和查看历史聊天记录
  */
 
+import { StyleSheet, ScrollView, View } from 'react-native';
+import { useRouter } from 'expo-router';
 import { ChatHistoryItem } from '@/components/ChatHistoryItem';
-import { Colors } from '@/constants/Colors';
 import { mockChatHistories } from '@/constants/MockData';
 import { ChatHistory } from '@/types/chat';
-import { router } from 'expo-router';
-import React, { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { useState, useRef } from 'react';
+import { Colors } from '@/constants/Colors';
 import * as Haptics from 'expo-haptics';
 
 export default function HomeScreen() {
+  const router = useRouter();
   const [chatHistories, setChatHistories] = useState<ChatHistory[]>(mockChatHistories);
+  const [isSwipeActive, setIsSwipeActive] = useState(false);
+  const scrollViewRef = useRef<ScrollView>(null);
 
-  // 处理聊天记录点击事件
-  const handleChatPress = (chat: ChatHistory) => {
+  const handlePress = (chat: ChatHistory) => {
     router.push(`/chat/${chat.id}`);
   };
 
-  // 处理删除聊天记录
   const handleDelete = (chatId: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setChatHistories(prev => prev.filter(chat => chat.id !== chatId));
   };
 
+  const handleSwipeStateChange = (isActive: boolean) => {
+    setIsSwipeActive(isActive);
+  };
+
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={chatHistories}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+    <ScrollView
+      ref={scrollViewRef}
+      style={styles.container}
+      scrollEnabled={!isSwipeActive}
+    >
+      <View style={styles.list}>
+        {chatHistories.map((chat) => (
           <ChatHistoryItem
-            chat={item}
-            onPress={handleChatPress}
+            key={chat.id}
+            chat={chat}
+            onPress={handlePress}
             onDelete={handleDelete}
+            onSwipeStateChange={handleSwipeStateChange}
           />
-        )}
-        contentContainerStyle={styles.listContent}
-      />
-    </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
@@ -48,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.light.background,
   },
-  listContent: {
+  list: {
     paddingVertical: 12,
   },
 });
