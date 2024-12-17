@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     maxHeight: 100,
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: Colors.light.card,
+    backgroundColor: Colors.light.messageBubble,
     borderRadius: 24,
     color: Colors.light.text,
   },
