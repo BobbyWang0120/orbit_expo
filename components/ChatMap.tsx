@@ -91,10 +91,13 @@ export function ChatMap() {
           <Marker
             key={index}
             coordinate={location.coordinate}
-            title={location.name}
+            title={`${index + 1}. ${location.name}`}
             description={location.description}
-            pinColor={Colors.light.tint}
-          />
+          >
+            <View style={styles.markerContainer}>
+              <Text style={styles.markerText}>{index + 1}</Text>
+            </View>
+          </Marker>
         ))}
       </MapView>
       
@@ -268,5 +271,28 @@ const styles = StyleSheet.create({
   selectedDayOptionText: {
     color: Colors.light.background,
     fontWeight: '600',
+  },
+  markerContainer: {
+    backgroundColor: Colors.light.tint,
+    borderRadius: 12,
+    width: 24,
+    height: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  markerText: {
+    color: Colors.light.background,
+    fontSize: 14,
+    fontWeight: '600',
+    textAlign: 'center',
+    lineHeight: 24,
   },
 });
