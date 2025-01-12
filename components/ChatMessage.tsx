@@ -1,6 +1,11 @@
 /**
- * 聊天消息组件
- * 用于显示单条聊天消息，支持不同类型的消息展示
+ * Chat Message Component
+ * 
+ * A modern, clean chat message bubble component that supports:
+ * - Different styles for user and AI messages
+ * - Clean typography and spacing
+ * - Subtle shadows and rounded corners
+ * - Optimized for readability
  */
 
 import { Colors } from '@/constants/Colors';
@@ -14,56 +19,6 @@ interface ChatMessageProps {
 
 export function ChatMessage({ message }: ChatMessageProps) {
   const isAI = message.sender === 'ai';
-
-  // 渲染行程安排
-  const renderItinerary = () => {
-    if (message.type !== 'itinerary' || !message.metadata?.itinerary) return null;
-
-    return (
-      <View style={styles.itinerary}>
-        {message.metadata.itinerary.map((day) => (
-          <View key={day.day} style={styles.dayContainer}>
-            <Text style={styles.dayTitle}>第{day.day}天</Text>
-            {day.activities.map((activity, index) => (
-              <View key={index} style={styles.activity}>
-                <Text style={styles.activityTime}>{activity.time}</Text>
-                <View style={styles.activityDetails}>
-                  <Text style={styles.activityDescription}>
-                    {activity.description}
-                  </Text>
-                  {activity.location && (
-                    <Text style={styles.activityLocation}>
-                      📍 {activity.location}
-                    </Text>
-                  )}
-                </View>
-              </View>
-            ))}
-          </View>
-        ))}
-      </View>
-    );
-  };
-
-  // 渲染位置信息
-  const renderLocation = () => {
-    if (message.type !== 'location' || !message.metadata?.locations) return null;
-
-    return (
-      <View style={styles.locations}>
-        {message.metadata.locations.map((location, index) => (
-          <View key={index} style={styles.location}>
-            <Text style={styles.locationName}>📍 {location.name}</Text>
-            {location.description && (
-              <Text style={styles.locationDescription}>
-                {location.description}
-              </Text>
-            )}
-          </View>
-        ))}
-      </View>
-    );
-  };
 
   return (
     <View
@@ -86,8 +41,6 @@ export function ChatMessage({ message }: ChatMessageProps) {
         >
           {message.content}
         </Text>
-        {renderItinerary()}
-        {renderLocation()}
       </View>
     </View>
   );
@@ -95,91 +48,45 @@ export function ChatMessage({ message }: ChatMessageProps) {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 8,
+    marginVertical: 6,
     marginHorizontal: 16,
+    maxWidth: '85%', // 限制消息气泡最大宽度
   },
   aiContainer: {
     alignItems: 'flex-start',
+    alignSelf: 'flex-start',
   },
   userContainer: {
     alignItems: 'flex-end',
+    alignSelf: 'flex-end',
   },
   bubble: {
-    maxWidth: '80%',
     padding: 12,
-    borderRadius: 16,
+    borderRadius: 18,
+    // 优化阴影效果
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
+    shadowOpacity: 0.08,
     shadowRadius: 2,
     elevation: 2,
   },
   aiBubble: {
     backgroundColor: Colors.light.messageBubble,
-    borderTopLeftRadius: 4,
+    borderBottomLeftRadius: 4, // 左下角尖角效果
   },
   userBubble: {
     backgroundColor: Colors.light.primary,
-    borderTopRightRadius: 4,
+    borderBottomRightRadius: 4, // 右下角尖角效果
   },
   messageText: {
-    fontSize: 16,
-    lineHeight: 22,
+    fontSize: 15,
+    lineHeight: 20,
+    letterSpacing: -0.24, // 稍微紧凑的字间距
   },
   aiText: {
     color: Colors.light.text,
   },
   userText: {
     color: Colors.light.background,
-  },
-  itinerary: {
-    marginTop: 8,
-    gap: 12,
-  },
-  dayContainer: {
-    gap: 8,
-  },
-  dayTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: Colors.light.text,
-    marginBottom: 4,
-  },
-  activity: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  activityTime: {
-    fontSize: 14,
-    color: Colors.light.textSecondary,
-    width: 60,
-  },
-  activityDetails: {
-    flex: 1,
-  },
-  activityDescription: {
-    fontSize: 14,
-    color: Colors.light.text,
-  },
-  activityLocation: {
-    fontSize: 12,
-    color: Colors.light.textLight,
-    marginTop: 2,
-  },
-  locations: {
-    marginTop: 8,
-    gap: 8,
-  },
-  location: {
-    gap: 4,
-  },
-  locationName: {
-    fontSize: 14,
-    color: Colors.light.text,
-    fontWeight: '500',
-  },
-  locationDescription: {
-    fontSize: 12,
-    color: Colors.light.textSecondary,
   },
 });
