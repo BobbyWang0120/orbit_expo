@@ -1,5 +1,18 @@
+/**
+ * Firebase Configuration
+ * 
+ * This file initializes Firebase services for the application:
+ * - Firebase Core
+ * - Authentication with AsyncStorage persistence
+ * - Cloud Firestore database
+ * 
+ * Note: Make sure to enable these services in your Firebase Console
+ * before using them in the application.
+ */
+
 import { initializeApp } from 'firebase/app';
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Your web app's Firebase configuration
@@ -21,4 +34,8 @@ const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage)
 });
 
-export { app, auth };
+// Initialize Firestore
+const db = getFirestore(app);
+
+// Export initialized services
+export { app, auth, db };
