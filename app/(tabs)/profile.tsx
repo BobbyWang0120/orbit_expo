@@ -28,20 +28,22 @@ export default function ProfileScreen() {
   if (user) {
     return (
       <View style={styles.container}>
-        <View style={styles.card}>
-          <Text style={styles.title}>Profile</Text>
-          <View style={styles.infoContainer}>
-            <Text style={styles.label}>Email</Text>
-            <Text style={styles.text}>{user.email}</Text>
-            <Text style={styles.label}>User ID</Text>
-            <Text style={styles.text}>{user.uid}</Text>
+        <View style={styles.contentContainer}>
+          <View style={styles.card}>
+            <Text style={styles.title}>Profile</Text>
+            <View style={styles.infoContainer}>
+              <Text style={styles.label}>Email</Text>
+              <Text style={styles.text}>{user.email}</Text>
+              <Text style={styles.label}>User ID</Text>
+              <Text style={styles.text}>{user.uid}</Text>
+            </View>
+            <TouchableOpacity 
+              style={styles.signOutButton}
+              onPress={() => auth.signOut()}
+            >
+              <Text style={styles.buttonText}>Sign Out</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity 
-            style={styles.signOutButton}
-            onPress={() => auth.signOut()}
-          >
-            <Text style={styles.buttonText}>Sign Out</Text>
-          </TouchableOpacity>
         </View>
       </View>
     );
@@ -49,36 +51,38 @@ export default function ProfileScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.title}>{isLogin ? 'Login' : 'Register'}</Text>
-        {error ? <Text style={styles.error}>{error}</Text> : null}
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize="none"
-          placeholderTextColor="#999"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          placeholderTextColor="#999"
-        />
-        <TouchableOpacity style={styles.button} onPress={handleAuth}>
-          <Text style={styles.buttonText}>{isLogin ? 'Login' : 'Register'}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={() => setIsLogin(!isLogin)}
-          style={styles.linkContainer}
-        >
-          <Text style={styles.link}>
-            {isLogin ? 'Need an account? Register' : 'Have an account? Login'}
-          </Text>
-        </TouchableOpacity>
+      <View style={styles.contentContainer}>
+        <View style={styles.card}>
+          <Text style={styles.title}>{isLogin ? 'Login' : 'Register'}</Text>
+          {error ? <Text style={styles.error}>{error}</Text> : null}
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            autoCapitalize="none"
+            placeholderTextColor="#999"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            placeholderTextColor="#999"
+          />
+          <TouchableOpacity style={styles.button} onPress={handleAuth}>
+            <Text style={styles.buttonText}>{isLogin ? 'Login' : 'Register'}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            onPress={() => setIsLogin(!isLogin)}
+            style={styles.linkContainer}
+          >
+            <Text style={styles.link}>
+              {isLogin ? 'Need an account? Register' : 'Have an account? Login'}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -87,8 +91,12 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: Colors.light.background,
+  },
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
   },
   card: {
     backgroundColor: '#fff',
