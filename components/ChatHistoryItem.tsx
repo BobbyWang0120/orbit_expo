@@ -1,191 +1,66 @@
 /**
- * 聊天历史记录列表项组件
- * 展示单条聊天历史的概要信息，包括标题、目的地和时间等
- * 支持左滑删除功能
+ * Chat History List Item Component
+ * Displays summary information for a single chat history, including title, destination and time
  */
 
 import { Colors } from '@/constants/Colors';
 import { ChatHistory } from '@/types/chat';
 import { format } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  Animated,
-  PanResponder,
   TouchableOpacity,
-  Dimensions
 } from 'react-native';
 import { IconSymbol } from './ui/IconSymbol';
-import * as Haptics from 'expo-haptics';
 
 interface ChatHistoryItemProps {
   chat: ChatHistory;
   onPress: (chat: ChatHistory) => void;
-  onDelete: (chatId: string) => void;
-  onSwipeStateChange?: (isActive: boolean) => void;
 }
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const DELETE_THRESHOLD = SCREEN_WIDTH * 0.3; // 30% 屏幕宽度为删除阈值
-const HAPTIC_THRESHOLD = DELETE_THRESHOLD * 0.6; // 60% 删除阈值时触发震动
-
-export function ChatHistoryItem({ chat, onPress, onDelete, onSwipeStateChange }: ChatHistoryItemProps) {
-  const pan = useRef(new Animated.ValueXY()).current;
-  const [hasTriggeredHaptic, setHasTriggeredHaptic] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-
-  // 当滑动状态改变时通知父组件
-  useEffect(() => {
-    onSwipeStateChange?.(isDragging);
-  }, [isDragging, onSwipeStateChange]);
-
-  const panResponder = useRef(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: (_, gestureState) => {
-        // 只响应水平滑动
-        const isHorizontalSwipe = Math.abs(gestureState.dx) > Math.abs(gestureState.dy * 2);
-        if (isHorizontalSwipe) {
-          onSwipeStateChange?.(true);
-        }
-        return isHorizontalSwipe;
-      },
-      onPanResponderGrant: () => {
-        setIsDragging(true);
-        setHasTriggeredHaptic(false);
-        pan.setOffset({
-          x: pan.x._value,
-          y: 0
-        });
-        pan.setValue({ x: 0, y: 0 });
-      },
-      onPanResponderMove: (_, gestureState) => {
-        // 只允许向左滑动
-        const x = Math.min(0, gestureState.dx);
-        pan.setValue({ x, y: 0 });
-
-        // 当滑动距离达到震动阈值时触发震动
-        if (!hasTriggeredHaptic && Math.abs(x) > HAPTIC_THRESHOLD) {
-          setHasTriggeredHaptic(true);
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-        }
-      },
-      onPanResponderRelease: (_, gestureState) => {
-        setIsDragging(false);
-        onSwipeStateChange?.(false);
-        pan.flattenOffset();
-
-        if (Math.abs(gestureState.dx) > DELETE_THRESHOLD) {
-          // 触发删除动画
-          Animated.timing(pan, {
-            toValue: { x: -SCREEN_WIDTH, y: 0 },
-            duration: 250,
-            useNativeDriver: false
-          }).start(() => {
-            onDelete(chat.id);
-          });
-        } else {
-          // 回弹动画
-          Animated.spring(pan, {
-            toValue: { x: 0, y: 0 },
-            useNativeDriver: false,
-            bounciness: 8
-          }).start();
-        }
-      },
-      onPanResponderTerminate: () => {
-        setIsDragging(false);
-        onSwipeStateChange?.(false);
-        // 回弹动画
-        Animated.spring(pan, {
-          toValue: { x: 0, y: 0 },
-          useNativeDriver: false,
-          bounciness: 8
-        }).start();
-      }
-    })
-  ).current;
-
+export function ChatHistoryItem({ chat, onPress }: ChatHistoryItemProps) {
   return (
     <View style={styles.wrapper}>
-      {/* 背景层 - 显示删除状态 */}
-      <Animated.View
-        style={[
-          styles.deleteBackground,
-          {
-            opacity: pan.x.interpolate({
-              inputRange: [-DELETE_THRESHOLD, 0],
-              outputRange: [1, 0],
-            })
-          }
-        ]}
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => onPress(chat)}
+        activeOpacity={0.7}
       >
-        <IconSymbol name="trash" size={24} color={Colors.light.background} />
-      </Animated.View>
-
-      {/* 卡片内容 */}
-      <Animated.View
-        style={[
-          styles.container,
-          {
-            transform: [{ translateX: pan.x }]
-          }
-        ]}
-        {...panResponder.panHandlers}
-      >
-        <TouchableOpacity
-          style={styles.touchable}
-          onPress={() => !isDragging && onPress(chat)}
-          activeOpacity={0.7}
-        >
-          <View style={styles.leftBorder} />
-          <View style={styles.content}>
-            <View style={styles.header}>
-              <Text style={styles.title} numberOfLines={1}>{chat.title}</Text>
-              <Text style={styles.timestamp}>
-                {format(chat.timestamp, 'MM月dd日', { locale: zhCN })}
-              </Text>
-            </View>
-            
-            <View style={styles.details}>
-              {chat.destination && (
-                <View style={styles.detailItem}>
-                  <IconSymbol name="mappin" size={14} color={Colors.light.textSecondary} />
-                  <Text style={styles.detail}>{chat.destination}</Text>
-                </View>
-              )}
-              {chat.duration && (
-                <View style={styles.detailItem}>
-                  <IconSymbol name="clock" size={14} color={Colors.light.textSecondary} />
-                  <Text style={styles.detail}>{chat.duration}</Text>
-                </View>
-              )}
-            </View>
+        <View style={styles.leftBorder} />
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <Text style={styles.title} numberOfLines={1}>{chat.title}</Text>
+            <Text style={styles.timestamp}>
+              {format(chat.timestamp, 'MMM dd')}
+            </Text>
           </View>
-        </TouchableOpacity>
-      </Animated.View>
+          
+          <View style={styles.details}>
+            {chat.destination && (
+              <View style={styles.detailItem}>
+                <IconSymbol name="mappin" size={14} color={Colors.light.textSecondary} />
+                <Text style={styles.detail}>{chat.destination}</Text>
+              </View>
+            )}
+            {chat.duration && (
+              <View style={styles.detailItem}>
+                <IconSymbol name="clock" size={14} color={Colors.light.textSecondary} />
+                <Text style={styles.detail}>{chat.duration}</Text>
+              </View>
+            )}
+          </View>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    position: 'relative',
     marginHorizontal: 16,
     marginVertical: 6,
-  },
-  deleteBackground: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    left: 0,
-    backgroundColor: Colors.light.error,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   container: {
     flexDirection: 'row',
@@ -197,10 +72,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 2,
-  },
-  touchable: {
-    flex: 1,
-    flexDirection: 'row',
   },
   leftBorder: {
     width: 4,
