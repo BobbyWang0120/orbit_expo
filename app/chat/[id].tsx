@@ -12,7 +12,7 @@ import { ChatMessage as ChatMessageType } from '@/types/chat';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import React, { useRef, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
 
 // 自定义返回按钮组件
 function BackButton() {
@@ -96,7 +96,11 @@ export default function ChatScreen() {
   };
   
   return (
-    <>
+    <KeyboardAvoidingView 
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0} // 适配底部 tabs 的高度
+    >
       <Stack.Screen
         options={{
           title: chatHistory?.title || '聊天',
@@ -114,26 +118,26 @@ export default function ChatScreen() {
           headerTitleStyle: styles.headerTitle,
         }}
       />
-      <View style={styles.container}>
-        <View style={styles.content}>
-          {showMap ? (
-            <ChatMap />
-          ) : (
-            <FlatList
-              ref={flatListRef}
-              data={messages}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => <ChatMessage message={item} />}
-              contentContainerStyle={styles.listContent}
-              onLayout={() => {
-                flatListRef.current?.scrollToEnd({ animated: false });
-              }}
-            />
-          )}
-        </View>
-        <ChatInput onSend={handleSend} />
+      <View style={styles.content}>
+        {showMap ? (
+          <ChatMap />
+        ) : (
+          <FlatList
+            ref={flatListRef}
+            data={messages}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => <ChatMessage message={item} />}
+            contentContainerStyle={styles.listContent}
+            onLayout={() => {
+              flatListRef.current?.scrollToEnd({ animated: false });
+            }}
+            keyboardDismissMode="on-drag"
+            keyboardShouldPersistTaps="handled"
+          />
+        )}
       </View>
-    </>
+      <ChatInput onSend={handleSend} />
+    </KeyboardAvoidingView>
   );
 }
 
@@ -146,7 +150,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContent: {
-    paddingVertical: 16,
+    paddingVertical: 12,
   },
   iconButton: {
     width: 40,

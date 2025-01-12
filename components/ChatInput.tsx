@@ -6,7 +6,7 @@
 import { Colors } from '@/constants/Colors';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import * as Haptics from 'expo-haptics';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   Animated,
   Keyboard,
@@ -26,6 +26,11 @@ interface ChatInputProps {
 export function ChatInput({ onSend, placeholder = '发送消息...' }: ChatInputProps) {
   const [message, setMessage] = useState('');
   const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  // 在组件挂载时确保键盘是关闭的
+  useEffect(() => {
+    Keyboard.dismiss();
+  }, []);
 
   // 处理发送按钮动画
   const handlePressIn = () => {

@@ -34,6 +34,10 @@ export default function TabLayout() {
         options={{
           title: 'Travel Plan',
           headerTitle: 'My Travels',
+          headerStyle: {
+            backgroundColor: Colors.light.background,
+          },
+          headerShadowVisible: false,
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="airplane" color={color} />
           ),
