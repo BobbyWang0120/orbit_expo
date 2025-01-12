@@ -1,79 +1,79 @@
-# 智能旅游助手 (AI Travel Assistant)
+# AI Travel Assistant
 
-## 项目概述
+## Project Overview
 
-智能旅游助手是一款基于React Native和Expo开发的移动应用，通过AI技术为用户提供个性化的旅游规划服务。应用采用Airbnb风格的设计语言，为用户提供简洁、现代且温馨的使用体验。
+AI Travel Assistant is a mobile application developed with React Native and Expo, providing personalized travel planning services through AI technology. The application adopts Airbnb's design language to deliver a clean, modern, and welcoming user experience.
 
-## 核心功能
+## Core Features
 
-1. **AI旅游对话**
-   - 用户可以与AI进行自然语言对话
-   - 表达旅游需求和偏好
-   - 获取个性化的旅游建议和规划
+1. **AI Travel Conversation**
+   - Natural language dialogue with AI
+   - Express travel preferences and requirements
+   - Receive personalized travel suggestions and plans
 
-2. **智能路线规划**
-   - 基于AI对话自动生成旅游路线
-   - 实时地图可视化展示
-   - 动态路线调整和优化
+2. **Smart Route Planning**
+   - Automatic travel route generation based on AI conversation
+   - Real-time map visualization
+   - Dynamic route adjustment and optimization
 
-3. **交互式地图**
-   - 显示推荐景点和路线
-   - 支持实时路线更新
-   - 与AI对话同步更新地图标记
+3. **Interactive Map**
+   - Display recommended attractions and routes
+   - Support real-time route updates
+   - Synchronize map markers with AI conversation
 
-## 主要组件
+## Main Components
 
-1. **对话历史（Chat History）**
-   - 展示用户与AI的历史对话记录
-   - 支持查看和继续历史对话
-   - 记录每次规划的关键信息
+1. **Chat History**
+   - Display historical conversations between users and AI
+   - Support viewing and continuing previous conversations
+   - Record key information from each planning session
 
-2. **地图组件（Map View）**
-   - 集成地图服务
-   - 显示景点标记和路线
-   - 支持动态更新和交互
+2. **Map View**
+   - Integrated map services
+   - Display attraction markers and routes
+   - Support dynamic updates and interactions
 
-## 技术栈
+## Tech Stack
 
-- **框架**: React Native + Expo
-- **UI设计**: 采用Airbnb设计风格
-- **地图服务**: 待定
-- **AI对话**: 待定
+- **Framework**: React Native + Expo
+- **UI Design**: Airbnb design style
+- **Map Service**: TBD
+- **AI Conversation**: TBD
 
-## 项目结构
+## Project Structure
 
 ```
 orbit_expo/
-├── app/                 # 应用主要代码
-│   ├── (tabs)/         # 标签页面
+├── app/                 # Main application code
+│   ├── (tabs)/         # Tab pages
 │   └── ...
-├── components/         # 可复用组件
-├── constants/         # 常量定义（如颜色主题）
-└── assets/           # 静态资源
+├── components/         # Reusable components
+├── constants/         # Constant definitions (e.g., color themes)
+└── assets/           # Static resources
 ```
 
-## 开发环境设置
+## Development Environment Setup
 
-1. 确保已安装必要的开发工具：
+1. Ensure necessary development tools are installed:
    - Node.js
-   - npm 或 yarn
+   - npm or yarn
    - Expo CLI
 
-2. 安装依赖：
+2. Install dependencies:
    ```bash
    npm install
-   # 或
+   # or
    yarn install
    ```
 
-3. 启动开发服务器：
+3. Start development server:
    ```bash
    npx expo start
    ```
 
-## 设计规范
+## Design Guidelines
 
-- 遵循Airbnb设计风格
-- 主色调：#FF5A5F（珊瑚红）
-- 简洁现代的界面设计
-- 注重用户体验和交互反馈
+- Follow Airbnb design style
+- Primary color: #FF5A5F (Coral Red)
+- Clean and modern interface design
+- Focus on user experience and interaction feedback
