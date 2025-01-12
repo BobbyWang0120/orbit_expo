@@ -1,6 +1,19 @@
 /**
  * Chat History List Item Component
- * Displays summary information for a single chat history, including title, destination and time
+ * 
+ * A modern, minimalist card design for chat history entries.
+ * Features:
+ * - Clean, spacious layout with subtle hover effects
+ * - Prominent title with elegant typography
+ * - Subtle date display
+ * - Smooth interaction feedback
+ * - Minimal visual noise with refined shadows
+ * 
+ * Design Principles:
+ * - Focus on content hierarchy
+ * - Whitespace for better readability
+ * - Subtle animations for better UX
+ * - Consistent with Airbnb-inspired design language
  */
 
 import { Colors } from '@/constants/Colors';
@@ -12,8 +25,8 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
-import { IconSymbol } from './ui/IconSymbol';
 
 interface ChatHistoryItemProps {
   chat: ChatHistory;
@@ -22,94 +35,98 @@ interface ChatHistoryItemProps {
 
 export function ChatHistoryItem({ chat, onPress }: ChatHistoryItemProps) {
   return (
-    <View style={styles.wrapper}>
-      <TouchableOpacity
-        style={styles.container}
-        onPress={() => onPress(chat)}
-        activeOpacity={0.7}
-      >
-        <View style={styles.leftBorder} />
+    <TouchableOpacity
+      style={styles.wrapper}
+      onPress={() => onPress(chat)}
+      activeOpacity={0.9} // Subtle press effect
+    >
+      {/* Main card container */}
+      <View style={styles.container}>
+        {/* Accent line for visual interest */}
+        <View style={styles.accentLine} />
+        
+        {/* Content area */}
         <View style={styles.content}>
-          <View style={styles.header}>
-            <Text style={styles.title} numberOfLines={1}>{chat.title}</Text>
-            <Text style={styles.timestamp}>
-              {format(chat.timestamp, 'MMM dd')}
-            </Text>
-          </View>
-          
-          <View style={styles.details}>
-            {chat.destination && (
-              <View style={styles.detailItem}>
-                <IconSymbol name="mappin" size={14} color={Colors.light.textSecondary} />
-                <Text style={styles.detail}>{chat.destination}</Text>
-              </View>
-            )}
-            {chat.duration && (
-              <View style={styles.detailItem}>
-                <IconSymbol name="clock" size={14} color={Colors.light.textSecondary} />
-                <Text style={styles.detail}>{chat.duration}</Text>
-              </View>
-            )}
-          </View>
+          {/* Title with modern typography */}
+          <Text 
+            style={styles.title} 
+            numberOfLines={1}
+          >
+            {chat.title}
+          </Text>
+
+          {/* Date with refined styling */}
+          <Text style={styles.timestamp}>
+            {format(chat.timestamp, 'MMM dd')}
+          </Text>
         </View>
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
+  // Wrapper container with improved spacing
   wrapper: {
     marginHorizontal: 16,
     marginVertical: 6,
+    borderRadius: 16,
+    // Platform-specific shadows for better depth
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.08,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
+
+  // Main container with refined styling
   container: {
     flexDirection: 'row',
-    backgroundColor: Colors.light.card,
-    borderRadius: 10,
+    backgroundColor: Colors.light.background,
+    borderRadius: 16,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.04)', // Subtle border
   },
-  leftBorder: {
-    width: 4,
+
+  // Modern accent line
+  accentLine: {
+    width: 3,
     backgroundColor: Colors.light.primary,
     opacity: 0.8,
   },
+
+  // Content container with improved spacing
   content: {
     flex: 1,
-    padding: 12,
-    gap: 6,
-  },
-  header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    gap: 12,
   },
+
+  // Enhanced title typography
   title: {
     flex: 1,
     fontSize: 16,
     fontWeight: '600',
     color: Colors.light.text,
-    marginRight: 8,
+    letterSpacing: -0.2, // Tighter letter spacing for modern look
   },
-  details: {
-    flexDirection: 'row',
-    gap: 16,
-  },
-  detailItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  detail: {
-    fontSize: 13,
-    color: Colors.light.textSecondary,
-  },
+
+  // Refined timestamp styling
   timestamp: {
-    fontSize: 12,
-    color: Colors.light.textLight,
+    fontSize: 13,
+    fontWeight: '500',
+    color: Colors.light.textSecondary,
+    opacity: 0.8,
   },
 });

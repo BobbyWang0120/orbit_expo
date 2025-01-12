@@ -22,15 +22,6 @@ export default function HomeScreen() {
     router.push(`/chat/${chat.id}`);
   };
 
-  const handleDelete = (chatId: string) => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    setChatHistories(prev => prev.filter(chat => chat.id !== chatId));
-  };
-
-  const handleSwipeStateChange = (isActive: boolean) => {
-    setIsSwipeActive(isActive);
-  };
-
   return (
     <ScrollView
       ref={scrollViewRef}
@@ -43,8 +34,6 @@ export default function HomeScreen() {
             key={chat.id}
             chat={chat}
             onPress={handlePress}
-            onDelete={handleDelete}
-            onSwipeStateChange={handleSwipeStateChange}
           />
         ))}
       </View>
