@@ -129,7 +129,7 @@ export function ChatMap() {
           size={24}
           color={Colors.light.text}
         />
-        <Text style={styles.dayText}>第{selectedDay}天</Text>
+        <Text style={styles.dayText}>Day {selectedDay}</Text>
       </Pressable>
 
       {/* 日期选择弹窗 */}
@@ -159,7 +159,7 @@ export function ChatMap() {
                     styles.dayOptionText,
                     day === selectedDay && styles.selectedDayOptionText
                   ]}>
-                    第{day}天
+                    Day {day}
                   </Text>
                 </Pressable>
               ))}

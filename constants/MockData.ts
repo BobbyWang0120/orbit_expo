@@ -178,5 +178,17 @@ export const mockTokyoMessages: ChatMessage[] = [
     content: 'Those are excellent choices! Tsukiji Market is famous for its fresh sushi, especially in the early morning. Senso-ji Temple and Meiji Shrine are both iconic cultural sites that will give you a great sense of Japanese tradition.',
     timestamp: new Date('2024-12-15T10:01:30'),
     sender: 'ai',
+  },
+  {
+    id: '5',
+    content: 'I\'m also interested in exploring Tokyo Tower and Akihabara.',
+    timestamp: new Date('2024-12-15T10:02:00'),
+    sender: 'user',
+  },
+  {
+    id: '6',
+    content: 'Tokyo Tower is a great place to see the city from above, and Akihabara is the perfect spot for electronics and anime enthusiasts.',
+    timestamp: new Date('2024-12-15T10:02:30'),
+    sender: 'ai',
   }
 ];

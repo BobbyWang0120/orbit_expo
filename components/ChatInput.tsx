@@ -23,7 +23,7 @@ interface ChatInputProps {
   placeholder?: string;
 }
 
-export function ChatInput({ onSend, placeholder = '发送消息...' }: ChatInputProps) {
+export function ChatInput({ onSend, placeholder = 'Type a message...' }: ChatInputProps) {
   const [message, setMessage] = useState('');
   const scaleAnim = useRef(new Animated.Value(1)).current;
 

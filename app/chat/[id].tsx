@@ -1,20 +1,25 @@
 /**
- * 聊天详情页面
- * 显示与AI的对话内容和地图
+ * Chat Detail Screen
+ * 
+ * Features:
+ * - Displays chat messages and map view
+ * - Supports switching between chat and map views
+ * - Real-time message updates
+ * - Dynamic header title based on current view
  */
 
 import { ChatInput } from '@/components/ChatInput';
 import { ChatMessage } from '@/components/ChatMessage';
 import { ChatMap } from '@/components/ChatMap';
 import { Colors } from '@/constants/Colors';
-import { mockChatHistories, mockTokyoMessages } from '@/constants/MockData';
+import { mockTokyoMessages } from '@/constants/MockData';
 import { ChatMessage as ChatMessageType } from '@/types/chat';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import React, { useRef, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
 
-// 自定义返回按钮组件
+// Custom back button component
 function BackButton() {
   return (
     <Pressable
@@ -33,7 +38,7 @@ function BackButton() {
   );
 }
 
-// 切换按钮组件
+// Toggle button component for switching between chat and map views
 function ToggleButton({ showMap, onPress }: { showMap: boolean; onPress: () => void }) {
   return (
     <Pressable
@@ -57,11 +62,8 @@ export default function ChatScreen() {
   const [messages, setMessages] = useState<ChatMessageType[]>(mockTokyoMessages);
   const [showMap, setShowMap] = useState(false);
   const flatListRef = useRef<FlatList>(null);
-  
-  // 获取聊天历史记录的标题
-  const chatHistory = mockChatHistories.find(chat => chat.id === id);
 
-  // 处理发送消息
+  // Handle sending new message
   const handleSend = (content: string) => {
     const newMessage: ChatMessageType = {
       id: Date.now().toString(),
@@ -72,23 +74,23 @@ export default function ChatScreen() {
 
     setMessages(prev => [...prev, newMessage]);
     
-    // 滚动到底部
+    // Scroll to bottom
     setTimeout(() => {
       flatListRef.current?.scrollToEnd({ animated: true });
     }, 100);
 
-    // TODO: 这里应该调用AI接口获取回复
-    // 现在我们模拟一个简单的回复
+    // TODO: Call AI API to get response
+    // Currently using a simple mock response
     setTimeout(() => {
       const aiResponse: ChatMessageType = {
         id: (Date.now() + 1).toString(),
-        content: '收到您的消息，我正在思考中...',
+        content: 'I received your message and I\'m thinking about it...',
         timestamp: new Date(),
         sender: 'ai',
       };
       setMessages(prev => [...prev, aiResponse]);
       
-      // 滚动到底部
+      // Scroll to bottom
       setTimeout(() => {
         flatListRef.current?.scrollToEnd({ animated: true });
       }, 100);
@@ -99,11 +101,11 @@ export default function ChatScreen() {
     <KeyboardAvoidingView 
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0} // 适配底部 tabs 的高度
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
     >
       <Stack.Screen
         options={{
-          title: chatHistory?.title || '聊天',
+          title: showMap ? 'Travel Map' : 'Chat',
           headerStyle: {
             backgroundColor: Colors.light.background,
           },
