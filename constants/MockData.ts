@@ -1,11 +1,11 @@
 /**
- * 模拟数据
- * 用于开发阶段展示UI效果
+ * Mock Data
+ * For UI development and testing
  */
 
 import { ChatHistory, ChatMessage } from '../types/chat';
 
-// 模拟的地图标记点数据
+// Mock map location data
 export interface MapLocation {
   name: string;
   description: string;
@@ -15,80 +15,80 @@ export interface MapLocation {
   };
 }
 
-// 按天数分组的地图标记点数据
+// Map locations grouped by day
 export const mockMapLocationsByDay: { [key: number]: MapLocation[] } = {
   1: [
     {
-      name: '筑地市场',
-      description: '世界最大的海鲜市场之一',
+      name: 'Tsukiji Market',
+      description: 'One of the world\'s largest fish markets',
       coordinate: { latitude: 35.6654, longitude: 139.7691 }
     },
     {
-      name: '浅草寺',
-      description: '东京最古老的寺庙',
+      name: 'Senso-ji Temple',
+      description: 'Tokyo\'s oldest Buddhist temple',
       coordinate: { latitude: 35.7147, longitude: 139.7966 }
     },
     {
-      name: '晴空塔',
-      description: '东京地标建筑',
+      name: 'Tokyo Skytree',
+      description: 'Tokyo\'s landmark tower',
       coordinate: { latitude: 35.7100, longitude: 139.8107 }
     }
   ],
   2: [
     {
-      name: '明治神宫',
-      description: '东京重要的神道教圣地',
+      name: 'Meiji Shrine',
+      description: 'Important Shinto shrine in Tokyo',
       coordinate: { latitude: 35.6764, longitude: 139.6993 }
     },
     {
-      name: '竹下通',
-      description: '原宿购物街',
+      name: 'Takeshita Street',
+      description: 'Harajuku shopping street',
       coordinate: { latitude: 35.6722, longitude: 139.7034 }
     },
     {
-      name: '涉谷站',
-      description: '著名的涉谷十字路口',
+      name: 'Shibuya Station',
+      description: 'Famous Shibuya Crossing',
       coordinate: { latitude: 35.6580, longitude: 139.7016 }
     }
   ],
   3: [
     {
-      name: '东京迪士尼乐园',
-      description: '亚洲第一个迪士尼乐园',
+      name: 'Tokyo Disneyland',
+      description: 'First Disney park in Asia',
       coordinate: { latitude: 35.6329, longitude: 139.8804 }
     }
   ],
   4: [
     {
-      name: '秋叶原',
-      description: '电器街和动漫文化中心',
+      name: 'Akihabara',
+      description: 'Electronics and anime culture center',
       coordinate: { latitude: 35.6987, longitude: 139.7714 }
     },
     {
-      name: '银座',
-      description: '高端购物区',
+      name: 'Ginza',
+      description: 'Upscale shopping district',
       coordinate: { latitude: 35.6721, longitude: 139.7636 }
     },
     {
-      name: '六本木',
-      description: '夜生活和美食区域',
+      name: 'Roppongi',
+      description: 'Nightlife and dining area',
       coordinate: { latitude: 35.6627, longitude: 139.7307 }
     }
   ],
   5: [
     {
-      name: '皇居',
-      description: '日本天皇居住地',
+      name: 'Imperial Palace',
+      description: 'Residence of Japan\'s Imperial Family',
       coordinate: { latitude: 35.6852, longitude: 139.7528 }
     },
     {
-      name: '上野公园',
-      description: '博物馆和美术馆集中地',
+      name: 'Ueno Park',
+      description: 'Hub of museums and art galleries',
       coordinate: { latitude: 35.7147, longitude: 139.7713 }
     },
     {
-      name: '羽田机场',
-      description: '东京国际机场',
+      name: 'Haneda Airport',
+      description: 'Tokyo International Airport',
       coordinate: { latitude: 35.5493, longitude: 139.7798 }
     }
   ]
@@ -97,85 +97,85 @@ export const mockMapLocationsByDay: { [key: number]: MapLocation[] } = {
 export const mockChatHistories: ChatHistory[] = [
   {
     id: '1',
-    title: '东京五日游规划',
-    destination: '东京',
-    duration: '5天',
+    title: '5 Days in Tokyo',
+    destination: 'Tokyo',
+    duration: '5 days',
     timestamp: new Date('2024-12-15T10:00:00'),
   },
   {
     id: '2',
-    title: '巴黎浪漫之旅',
-    destination: '巴黎',
-    duration: '7天',
+    title: 'Romantic Paris Trip',
+    destination: 'Paris',
+    duration: '7 days',
     timestamp: new Date('2024-12-14T15:30:00'),
   },
   {
     id: '3',
-    title: '纽约城市探索',
-    destination: '纽约',
-    duration: '6天',
+    title: 'New York City Explorer',
+    destination: 'New York',
+    duration: '6 days',
     timestamp: new Date('2024-12-13T09:15:00'),
   },
   {
     id: '4',
-    title: '迪拜奢华体验',
-    destination: '迪拜',
-    duration: '4天',
+    title: 'Luxury Dubai Experience',
+    destination: 'Dubai',
+    duration: '4 days',
     timestamp: new Date('2024-12-12T14:20:00'),
   },
   {
     id: '5',
-    title: '悉尼海滨假期',
-    destination: '悉尼',
-    duration: '8天',
+    title: 'Sydney Beach Holiday',
+    destination: 'Sydney',
+    duration: '8 days',
     timestamp: new Date('2024-12-11T16:45:00'),
   },
   {
     id: '6',
-    title: '伦敦文化之旅',
-    destination: '伦敦',
-    duration: '6天',
+    title: 'Cultural London Tour',
+    destination: 'London',
+    duration: '6 days',
     timestamp: new Date('2024-12-10T11:30:00'),
   },
   {
     id: '7',
-    title: '马尔代夫度假',
-    destination: '马尔代夫',
-    duration: '5天',
+    title: 'Maldives Getaway',
+    destination: 'Maldives',
+    duration: '5 days',
     timestamp: new Date('2024-12-09T13:20:00'),
   },
   {
     id: '8',
-    title: '罗马历史探索',
-    destination: '罗马',
-    duration: '6天',
+    title: 'Historic Rome Explorer',
+    destination: 'Rome',
+    duration: '6 days',
     timestamp: new Date('2024-12-08T10:15:00'),
   },
 ];
 
-// 模拟的东京五日游对话数据
+// Mock conversation data for Tokyo 5-day trip
 export const mockTokyoMessages: ChatMessage[] = [
   {
     id: '1',
-    content: '你好，我想规划一次东京五日游，主要想体验当地美食和特色景点。',
+    content: 'Hi, I\'d like to plan a 5-day trip to Tokyo, focusing on local food and attractions.',
     timestamp: new Date('2024-12-15T10:00:00'),
     sender: 'user',
   },
   {
     id: '2',
-    content: '您好！我很乐意帮您规划东京之旅。东京是一个美食与文化并存的城市。请问您有特别想去的地方或者特别感兴趣的日本料理吗？',
+    content: 'Hello! I\'d be happy to help plan your Tokyo trip. Tokyo is a city where food and culture come together beautifully. Do you have any specific places you\'d like to visit or Japanese dishes you\'d like to try?',
     timestamp: new Date('2024-12-15T10:00:30'),
     sender: 'ai',
   },
   {
     id: '3',
-    content: '我特别想去筑地市场吃新鲜寿司，还有想去浅草寺和明治神宫感受日本文化。',
+    content: 'I really want to try fresh sushi at Tsukiji Market, and I\'d love to visit Senso-ji Temple and Meiji Shrine.',
     timestamp: new Date('2024-12-15T10:01:00'),
     sender: 'user',
   },
   {
     id: '4',
-    content: '非常好的选择！根据您的兴趣，我为您规划了一个初步的行程安排：',
+    content: 'Great choices! I\'ve created an initial itinerary based on your interests:',
     timestamp: new Date('2024-12-15T10:01:30'),
     sender: 'ai',
     type: 'itinerary',
@@ -185,19 +185,19 @@ export const mockTokyoMessages: ChatMessage[] = [
           day: 1,
           activities: [
             {
-              time: '上午',
-              description: '筑地市场寿司体验',
-              location: '筑地市场'
+              time: 'Morning',
+              description: 'Sushi experience at Tsukiji Market',
+              location: 'Tsukiji Market'
             },
             {
-              time: '下午',
-              description: '浅草寺参观',
-              location: '浅草寺'
+              time: 'Afternoon',
+              description: 'Visit Senso-ji Temple',
+              location: 'Senso-ji Temple'
             },
             {
-              time: '晚上',
-              description: '晴空塔夜景',
-              location: '晴空塔'
+              time: 'Evening',
+              description: 'Tokyo Skytree night view',
+              location: 'Tokyo Skytree'
             }
           ]
         }
@@ -206,21 +206,21 @@ export const mockTokyoMessages: ChatMessage[] = [
   },
   {
     id: '5',
-    content: '这些地方听起来都很棒！请问筑地市场最好是什么时候去？',
+    content: 'These places sound great! What\'s the best time to visit Tsukiji Market?',
     timestamp: new Date('2024-12-15T10:02:00'),
     sender: 'user',
   },
   {
     id: '6',
-    content: '建议清晨5:30-6:00到达筑地市场，因为：\n1. 这时能看到最新鲜的海鲜\n2. 很多知名寿司店上午11点前就会满座\n3. 避开旅游高峰，体验更好\n\n我可以为您标记一下具体位置：',
+    content: 'I recommend arriving at Tsukiji Market between 5:30-6:00 AM because:\n1. You\'ll see the freshest seafood\n2. Popular sushi restaurants often fill up before 11 AM\n3. You\'ll avoid tourist crowds for a better experience\n\nLet me mark the location for you:',
     timestamp: new Date('2024-12-15T10:02:30'),
     sender: 'ai',
     type: 'location',
     metadata: {
       locations: [
         {
-          name: '筑地市场',
-          description: '世界最大的海鲜市场之一，以新鲜寿司闻名',
+          name: 'Tsukiji Market',
+          description: 'One of the world\'s largest fish markets, famous for fresh sushi',
           coordinates: [139.7691, 35.6654]
         }
       ]
@@ -228,13 +228,13 @@ export const mockTokyoMessages: ChatMessage[] = [
   },
   {
     id: '7',
-    content: '明白了，那其他几天的行程建议呢？',
+    content: 'I see, what about the itinerary for the other days?',
     timestamp: new Date('2024-12-15T10:03:00'),
     sender: 'user',
   },
   {
     id: '8',
-    content: '我来为您规划完整的五天行程：',
+    content: 'Let me plan out the full 5-day itinerary for you:',
     timestamp: new Date('2024-12-15T10:03:30'),
     sender: 'ai',
     type: 'itinerary',
@@ -244,19 +244,19 @@ export const mockTokyoMessages: ChatMessage[] = [
           day: 1,
           activities: [
             {
-              time: '早上',
-              description: '筑地市场寿司体验',
-              location: '筑地市场'
+              time: 'Morning',
+              description: 'Sushi experience at Tsukiji Market',
+              location: 'Tsukiji Market'
             },
             {
-              time: '下午',
-              description: '浅草寺参观',
-              location: '浅草寺'
+              time: 'Afternoon',
+              description: 'Visit Senso-ji Temple',
+              location: 'Senso-ji Temple'
             },
             {
-              time: '晚上',
-              description: '晴空塔夜景',
-              location: '晴空塔'
+              time: 'Evening',
+              description: 'Tokyo Skytree night view',
+              location: 'Tokyo Skytree'
             }
           ]
         },
@@ -264,19 +264,19 @@ export const mockTokyoMessages: ChatMessage[] = [
           day: 2,
           activities: [
             {
-              time: '上午',
-              description: '明治神宫参拜',
-              location: '明治神宫'
+              time: 'Morning',
+              description: 'Visit Meiji Shrine',
+              location: 'Meiji Shrine'
             },
             {
-              time: '下午',
-              description: '原宿购物体验',
-              location: '竹下通'
+              time: 'Afternoon',
+              description: 'Harajuku shopping experience',
+              location: 'Takeshita Street'
             },
             {
-              time: '晚上',
-              description: '涉谷夜生活',
-              location: '涉谷站'
+              time: 'Evening',
+              description: 'Shibuya nightlife',
+              location: 'Shibuya Station'
             }
           ]
         },
@@ -284,9 +284,9 @@ export const mockTokyoMessages: ChatMessage[] = [
           day: 3,
           activities: [
             {
-              time: '全天',
-              description: '迪士尼乐园',
-              location: '东京迪士尼乐园'
+              time: 'Full day',
+              description: 'Tokyo Disneyland',
+              location: 'Tokyo Disneyland'
             }
           ]
         },
@@ -294,19 +294,19 @@ export const mockTokyoMessages: ChatMessage[] = [
           day: 4,
           activities: [
             {
-              time: '上午',
-              description: '秋叶原电器街',
-              location: '秋叶原'
+              time: 'Morning',
+              description: 'Akihabara electronics district',
+              location: 'Akihabara'
             },
             {
-              time: '下午',
-              description: '银座购物',
-              location: '银座'
+              time: 'Afternoon',
+              description: 'Ginza shopping',
+              location: 'Ginza'
             },
             {
-              time: '晚上',
-              description: '六本木美食',
-              location: '六本木'
+              time: 'Evening',
+              description: 'Roppongi dining',
+              location: 'Roppongi'
             }
           ]
         },
@@ -314,19 +314,19 @@ export const mockTokyoMessages: ChatMessage[] = [
           day: 5,
           activities: [
             {
-              time: '上午',
-              description: '皇居外苑',
-              location: '皇居'
+              time: 'Morning',
+              description: 'Imperial Palace Gardens',
+              location: 'Imperial Palace'
             },
             {
-              time: '下午',
-              description: '上野公园',
-              location: '上野公园'
+              time: 'Afternoon',
+              description: 'Ueno Park museums',
+              location: 'Ueno Park'
             },
             {
-              time: '晚上',
-              description: '羽田机场',
-              location: '羽田机场'
+              time: 'Evening',
+              description: 'Departure',
+              location: 'Haneda Airport'
             }
           ]
         }
