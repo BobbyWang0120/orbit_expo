@@ -9,8 +9,8 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 /**
- * 标签页布局组件
- * 当前只包含聊天历史记录标签页
+ * Tab Layout Component
+ * Contains Travel Planning and Profile tabs
  */
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -32,10 +32,20 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: '旅行规划',
-          headerTitle: '我的旅行',
+          title: 'Travel Plan',
+          headerTitle: 'My Travels',
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="airplane" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          headerTitle: 'My Profile',
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="person" color={color} />
           ),
         }}
       />
