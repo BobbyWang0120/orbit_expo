@@ -2,6 +2,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { app } from '@/config/firebase';
+import { Colors } from '@/constants/Colors';
 
 export default function ProfileScreen() {
   const [isLogin, setIsLogin] = useState(true);
@@ -36,45 +37,58 @@ export default function ProfileScreen() {
   if (user) {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Profile</Text>
-        <Text style={styles.text}>Email: {user.email}</Text>
-        <Text style={styles.text}>User ID: {user.uid}</Text>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => auth.signOut()}
-        >
-          <Text style={styles.buttonText}>Sign Out</Text>
-        </TouchableOpacity>
+        <View style={styles.card}>
+          <Text style={styles.title}>Profile</Text>
+          <View style={styles.infoContainer}>
+            <Text style={styles.label}>Email</Text>
+            <Text style={styles.text}>{user.email}</Text>
+            <Text style={styles.label}>User ID</Text>
+            <Text style={styles.text}>{user.uid}</Text>
+          </View>
+          <TouchableOpacity 
+            style={styles.signOutButton}
+            onPress={() => auth.signOut()}
+          >
+            <Text style={styles.buttonText}>Sign Out</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{isLogin ? 'Login' : 'Register'}</Text>
-      {error ? <Text style={styles.error}>{error}</Text> : null}
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TouchableOpacity style={styles.button} onPress={handleAuth}>
-        <Text style={styles.buttonText}>{isLogin ? 'Login' : 'Register'}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
-        <Text style={styles.link}>
-          {isLogin ? 'Need an account? Register' : 'Have an account? Login'}
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.card}>
+        <Text style={styles.title}>{isLogin ? 'Login' : 'Register'}</Text>
+        {error ? <Text style={styles.error}>{error}</Text> : null}
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          placeholderTextColor="#999"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          placeholderTextColor="#999"
+        />
+        <TouchableOpacity style={styles.button} onPress={handleAuth}>
+          <Text style={styles.buttonText}>{isLogin ? 'Login' : 'Register'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          onPress={() => setIsLogin(!isLogin)}
+          style={styles.linkContainer}
+        >
+          <Text style={styles.link}>
+            {isLogin ? 'Need an account? Register' : 'Have an account? Login'}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -83,43 +97,81 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: Colors.light.background,
+  },
+  card: {
     backgroundColor: '#fff',
+    borderRadius: 15,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontSize: 28,
+    fontWeight: '600',
+    marginBottom: 24,
     textAlign: 'center',
+    color: '#333',
+  },
+  infoContainer: {
+    marginBottom: 24,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ddd',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
+    borderColor: '#E5E5E5',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 16,
+    fontSize: 16,
+    backgroundColor: '#F8F8F8',
   },
   button: {
-    backgroundColor: '#007AFF',
-    padding: 15,
-    borderRadius: 5,
-    marginBottom: 10,
+    backgroundColor: '#FF5A5F',
+    padding: 16,
+    borderRadius: 10,
+    marginBottom: 16,
+  },
+  signOutButton: {
+    backgroundColor: '#FF5A5F',
+    padding: 16,
+    borderRadius: 10,
   },
   buttonText: {
     color: '#fff',
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  linkContainer: {
+    paddingVertical: 8,
   },
   link: {
-    color: '#007AFF',
+    color: '#FF5A5F',
     textAlign: 'center',
+    fontSize: 15,
+    fontWeight: '500',
   },
   error: {
-    color: 'red',
-    marginBottom: 10,
+    color: '#FF5A5F',
+    marginBottom: 16,
     textAlign: 'center',
+    fontSize: 14,
+  },
+  label: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 4,
+    fontWeight: '500',
   },
   text: {
     fontSize: 16,
-    marginBottom: 10,
+    color: '#333',
+    marginBottom: 16,
   },
 });
