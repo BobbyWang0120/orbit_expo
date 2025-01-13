@@ -5,7 +5,7 @@
  * - Real-time chat messages from Firestore
  * - Supports switching between chat and map views
  * - Messages are associated with specific chat conversations
- * - Debug view shows chat ID when no messages exist
+ * - AI responses generated through Firebase Functions
  */
 
 import { ChatInput } from '@/components/ChatInput';
@@ -20,6 +20,12 @@ import { FlatList, Pressable, StyleSheet, View, KeyboardAvoidingView, Platform, 
 import { collection, query, orderBy, onSnapshot, addDoc, where } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import { useAuth } from '@/contexts/AuthContext';
+import { getFunctions, httpsCallable } from 'firebase/functions';
+
+// Types for AI response
+interface AIFunctionResponse {
+  response: string;
+}
 
 // Custom back button component
 function BackButton() {
@@ -64,7 +70,9 @@ export default function ChatScreen() {
   const { user } = useAuth();
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
   const [showMap, setShowMap] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const flatListRef = useRef<FlatList>(null);
+  const functions = getFunctions();
 
   // Subscribe to messages from Firestore
   useEffect(() => {
@@ -93,10 +101,12 @@ export default function ChatScreen() {
 
   // Handle sending new message
   const handleSend = async (content: string) => {
-    if (!id || !user || !content.trim()) return;
+    if (!id || !user || !content.trim() || isLoading) return;
 
     try {
-      // Add message to Firestore
+      setIsLoading(true);
+      
+      // Add user message to Firestore
       await addDoc(collection(db, 'messages'), {
         chatId: id,
         content: content.trim(),
@@ -110,23 +120,46 @@ export default function ChatScreen() {
         flatListRef.current?.scrollToEnd({ animated: true });
       }, 100);
 
-      // TODO: Call AI API to get response
-      // For now, we'll add a simple AI response to Firestore
-      setTimeout(async () => {
+      // Call Firebase Function to get AI response
+      try {
+        const generateAIResponse = httpsCallable<{ message: string; chatId: string }, AIFunctionResponse>(
+          functions,
+          'generateAIResponse'
+        );
+        
+        const result = await generateAIResponse({
+          message: content.trim(),
+          chatId: id,
+        });
+        
+        // Add AI response to Firestore
         await addDoc(collection(db, 'messages'), {
           chatId: id,
-          content: "I received your message and I'm thinking about it...",
+          content: result.data.response,
           timestamp: new Date(),
           sender: 'ai',
           userId: user.uid,
         });
 
+        // Scroll to bottom after AI response
         setTimeout(() => {
           flatListRef.current?.scrollToEnd({ animated: true });
         }, 100);
-      }, 1000);
+      } catch (error) {
+        console.error('Error getting AI response:', error);
+        // Add error message to chat
+        await addDoc(collection(db, 'messages'), {
+          chatId: id,
+          content: "Sorry, I'm having trouble generating a response right now. Please try again later.",
+          timestamp: new Date(),
+          sender: 'ai',
+          userId: user.uid,
+        });
+      }
     } catch (error) {
       console.error('Error sending message:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
   
