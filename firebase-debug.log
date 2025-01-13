@@ -1,0 +1,422 @@
+[debug] [2025-01-13T06:43:35.971Z] ----------------------------------------------------------------------
+[debug] [2025-01-13T06:43:35.973Z] Command:       /Users/bobbywang/.nvm/versions/node/v20.18.0/bin/node /Users/bobbywang/.nvm/versions/node/v20.18.0/bin/firebase deploy
+[debug] [2025-01-13T06:43:35.973Z] CLI Version:   13.29.1
+[debug] [2025-01-13T06:43:35.973Z] Platform:      darwin
+[debug] [2025-01-13T06:43:35.973Z] Node Version:  v20.18.0
+[debug] [2025-01-13T06:43:35.973Z] Time:          Mon Jan 13 2025 01:43:35 GMT-0500 (Eastern Standard Time)
+[debug] [2025-01-13T06:43:35.973Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-01-13T06:43:36.005Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-01-13T06:43:36.005Z] > authorizing via signed-in user (elevatustech@gmail.com)
+[debug] [2025-01-13T06:43:36.005Z] [iam] checking project orbit-react-native for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-01-13T06:43:36.006Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:36.006Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:36.006Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions [none]
+[debug] [2025-01-13T06:43:36.006Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:36.006Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-01-13T06:43:36.130Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions 200
+[debug] [2025-01-13T06:43:36.130Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-01-13T06:43:36.130Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:36.130Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:36.130Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/orbit-react-native/serviceAccounts/orbit-react-native@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-01-13T06:43:36.130Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/orbit-react-native/serviceAccounts/orbit-react-native@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-01-13T06:43:36.236Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/orbit-react-native/serviceAccounts/orbit-react-native@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-01-13T06:43:36.236Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/orbit-react-native/serviceAccounts/orbit-react-native@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'orbit-react-native'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build
+[info] ✔  functions: Finished running predeploy script. 
+[debug] [2025-01-13T06:43:40.656Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:40.656Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:40.656Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native [none]
+[debug] [2025-01-13T06:43:40.737Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native 200
+[debug] [2025-01-13T06:43:40.737Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native {"projectNumber":"579445155029","projectId":"orbit-react-native","lifecycleState":"ACTIVE","name":"orbit-react-native","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-01-12T07:34:12.792710Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[debug] [2025-01-13T06:43:40.738Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:40.738Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:40.738Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:40.738Z] Checked if tokens are valid: true, expires at: 1736754081042
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2025-01-13T06:43:40.738Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:40.738Z] Checked if tokens are valid: true, expires at: 1736754081042
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-01-13T06:43:40.739Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:40.739Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:40.739Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudfunctions.googleapis.com [none]
+[debug] [2025-01-13T06:43:40.739Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:40.739Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/runtimeconfig.googleapis.com [none]
+[debug] [2025-01-13T06:43:40.739Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:40.740Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com [none]
+[debug] [2025-01-13T06:43:40.740Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:40.740Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com [none]
+[debug] [2025-01-13T06:43:40.740Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:41.019Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com 200
+[debug] [2025-01-13T06:43:41.019Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com [omitted]
+[warn] ⚠  functions: missing required API cloudbuild.googleapis.com. Enabling now... 
+[debug] [2025-01-13T06:43:41.019Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:41.019Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:41.019Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com:enable [none]
+[debug] [2025-01-13T06:43:41.019Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com:enable x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:41.035Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/runtimeconfig.googleapis.com 200
+[debug] [2025-01-13T06:43:41.035Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2025-01-13T06:43:41.063Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com 200
+[debug] [2025-01-13T06:43:41.063Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com [omitted]
+[warn] ⚠  artifactregistry: missing required API artifactregistry.googleapis.com. Enabling now... 
+[debug] [2025-01-13T06:43:41.063Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:41.063Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:41.064Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com:enable [none]
+[debug] [2025-01-13T06:43:41.064Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com:enable x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:41.067Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudfunctions.googleapis.com 200
+[debug] [2025-01-13T06:43:41.067Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2025-01-13T06:43:41.572Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com:enable 200
+[debug] [2025-01-13T06:43:41.572Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com:enable [omitted]
+[debug] [2025-01-13T06:43:41.661Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com:enable 200
+[debug] [2025-01-13T06:43:41.661Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com:enable [omitted]
+[debug] [2025-01-13T06:43:51.577Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:51.578Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:51.578Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com [none]
+[debug] [2025-01-13T06:43:51.578Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:51.662Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:51.663Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:51.663Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com [none]
+[debug] [2025-01-13T06:43:51.664Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:51.925Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com 200
+[debug] [2025-01-13T06:43:51.926Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2025-01-13T06:43:51.931Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com 200
+[debug] [2025-01-13T06:43:51.932Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2025-01-13T06:43:51.933Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:51.933Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:51.933Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/orbit-react-native/adminSdkConfig [none]
+[debug] [2025-01-13T06:43:52.285Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/orbit-react-native/adminSdkConfig 200
+[debug] [2025-01-13T06:43:52.286Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/orbit-react-native/adminSdkConfig {"projectId":"orbit-react-native","storageBucket":"orbit-react-native.firebasestorage.app"}
+[debug] [2025-01-13T06:43:52.287Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:52.287Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:52.287Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/orbit-react-native/configs [none]
+[debug] [2025-01-13T06:43:52.467Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/orbit-react-native/configs 200
+[debug] [2025-01-13T06:43:52.467Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/orbit-react-native/configs {}
+[debug] [2025-01-13T06:43:52.468Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2025-01-13T06:43:52.815Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-01-13T06:43:52.815Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-01-13T06:43:52.815Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-01-13T06:43:52.820Z] Found firebase-functions binary at '/Users/bobbywang/Desktop/Projects/playground/orbit_expo/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8869
+
+[debug] [2025-01-13T06:43:53.092Z] Got response from /__/functions.yaml {"endpoints":{"helloWorld":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"helloWorld"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled... 
+[debug] [2025-01-13T06:43:57.113Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:57.113Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:57.113Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com [none]
+[debug] [2025-01-13T06:43:57.113Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:57.442Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com 200
+[debug] [2025-01-13T06:43:57.443Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com [omitted]
+[warn] ⚠  extensions: missing required API firebaseextensions.googleapis.com. Enabling now... 
+[debug] [2025-01-13T06:43:57.443Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:57.443Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:43:57.443Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com:enable [none]
+[debug] [2025-01-13T06:43:57.444Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com:enable x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:43:57.939Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com:enable 200
+[debug] [2025-01-13T06:43:57.939Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com:enable [omitted]
+[debug] [2025-01-13T06:44:07.941Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:07.942Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:07.943Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com [none]
+[debug] [2025-01-13T06:44:07.943Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:08.218Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com 200
+[debug] [2025-01-13T06:44:08.218Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/firebaseextensions.googleapis.com [omitted]
+[info] ✔  extensions: required API firebaseextensions.googleapis.com is enabled 
+[debug] [2025-01-13T06:44:08.219Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-01-13T06:44:08.220Z] > authorizing via signed-in user (elevatustech@gmail.com)
+[debug] [2025-01-13T06:44:08.220Z] [iam] checking project orbit-react-native for permissions ["firebase.projects.get","firebaseextensions.instances.list"]
+[debug] [2025-01-13T06:44:08.220Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:08.220Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:08.220Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions [none]
+[debug] [2025-01-13T06:44:08.220Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:08.220Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-01-13T06:44:08.381Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions 200
+[debug] [2025-01-13T06:44:08.381Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-01-13T06:44:08.381Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:08.381Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:08.382Z] >>> [apiv2][query] GET https://firebaseextensions.googleapis.com/v1beta/projects/orbit-react-native/instances pageSize=100&pageToken=
+[debug] [2025-01-13T06:44:09.604Z] <<< [apiv2][status] GET https://firebaseextensions.googleapis.com/v1beta/projects/orbit-react-native/instances 200
+[debug] [2025-01-13T06:44:09.604Z] <<< [apiv2][body] GET https://firebaseextensions.googleapis.com/v1beta/projects/orbit-react-native/instances {}
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged /Users/bobbywang/Desktop/Projects/playground/orbit_expo/functions (87.03 KB) for uploading 
+[debug] [2025-01-13T06:44:09.630Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:09.630Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:09.630Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/orbit-react-native/locations/-/functions [none]
+[debug] [2025-01-13T06:44:10.185Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/orbit-react-native/locations/-/functions 200
+[debug] [2025-01-13T06:44:10.185Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/orbit-react-native/locations/-/functions {}
+[debug] [2025-01-13T06:44:10.186Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.186Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.186Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2025-01-13T06:44:10.586Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/-/functions 200
+[debug] [2025-01-13T06:44:10.587Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/-/functions {}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[debug] [2025-01-13T06:44:10.590Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.590Z] Checked if tokens are valid: true, expires at: 1736754081042
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[debug] [2025-01-13T06:44:10.591Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.591Z] Checked if tokens are valid: true, expires at: 1736754081042
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[debug] [2025-01-13T06:44:10.591Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.591Z] Checked if tokens are valid: true, expires at: 1736754081042
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[debug] [2025-01-13T06:44:10.591Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.591Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.591Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com [none]
+[debug] [2025-01-13T06:44:10.591Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:10.592Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com [none]
+[debug] [2025-01-13T06:44:10.592Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:10.594Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/pubsub.googleapis.com [none]
+[debug] [2025-01-13T06:44:10.596Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/pubsub.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:10.598Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/storage.googleapis.com [none]
+[debug] [2025-01-13T06:44:10.598Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/storage.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:10.824Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com 200
+[debug] [2025-01-13T06:44:10.824Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com [omitted]
+[warn] ⚠  functions: missing required API run.googleapis.com. Enabling now... 
+[debug] [2025-01-13T06:44:10.825Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.825Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.825Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com:enable [none]
+[debug] [2025-01-13T06:44:10.825Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com:enable x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:10.911Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/pubsub.googleapis.com 200
+[debug] [2025-01-13T06:44:10.911Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/pubsub.googleapis.com [omitted]
+[info] ✔  functions: required API pubsub.googleapis.com is enabled 
+[debug] [2025-01-13T06:44:10.914Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com 200
+[debug] [2025-01-13T06:44:10.914Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com [omitted]
+[warn] ⚠  functions: missing required API eventarc.googleapis.com. Enabling now... 
+[debug] [2025-01-13T06:44:10.914Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.915Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:10.915Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com:enable [none]
+[debug] [2025-01-13T06:44:10.915Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com:enable x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:10.928Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/storage.googleapis.com 200
+[debug] [2025-01-13T06:44:10.928Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/storage.googleapis.com [omitted]
+[info] ✔  functions: required API storage.googleapis.com is enabled 
+[debug] [2025-01-13T06:44:11.416Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com:enable 200
+[debug] [2025-01-13T06:44:11.416Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com:enable [omitted]
+[debug] [2025-01-13T06:44:11.437Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com:enable 200
+[debug] [2025-01-13T06:44:11.437Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com:enable [omitted]
+[debug] [2025-01-13T06:44:21.416Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:21.417Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:21.417Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com [none]
+[debug] [2025-01-13T06:44:21.417Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:21.441Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:21.442Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:21.442Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com [none]
+[debug] [2025-01-13T06:44:21.442Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:21.746Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com 200
+[debug] [2025-01-13T06:44:21.746Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/run.googleapis.com [omitted]
+[info] ✔  functions: required API run.googleapis.com is enabled 
+[debug] [2025-01-13T06:44:21.771Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com 200
+[debug] [2025-01-13T06:44:21.771Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/orbit-react-native/services/eventarc.googleapis.com [omitted]
+[info] ✔  functions: required API eventarc.googleapis.com is enabled 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[debug] [2025-01-13T06:44:21.772Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:21.772Z] Checked if tokens are valid: true, expires at: 1736754081042
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2025-01-13T06:44:21.772Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:21.772Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:21.772Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/579445155029/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2025-01-13T06:44:21.773Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/579445155029/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2025-01-13T06:44:22.405Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/579445155029/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2025-01-13T06:44:22.405Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/579445155029/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-579445155029@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"105634810673284873498"}}
+[debug] [2025-01-13T06:44:22.445Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/579445155029/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2025-01-13T06:44:22.446Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/579445155029/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-579445155029@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"105575790913623847558"}}
+[debug] [2025-01-13T06:44:22.449Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:22.450Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:22.450Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native [none]
+[debug] [2025-01-13T06:44:22.577Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native 200
+[debug] [2025-01-13T06:44:22.577Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native {"projectNumber":"579445155029","projectId":"orbit-react-native","lifecycleState":"ACTIVE","name":"orbit-react-native","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-01-12T07:34:12.792710Z"}
+[debug] [2025-01-13T06:44:22.579Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:22.579Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:22.579Z] >>> [apiv2][query] GET https://cloudbilling.googleapis.com/v1/projects/orbit-react-native/billingInfo [none]
+[debug] [2025-01-13T06:44:22.821Z] <<< [apiv2][status] GET https://cloudbilling.googleapis.com/v1/projects/orbit-react-native/billingInfo 200
+[debug] [2025-01-13T06:44:22.821Z] <<< [apiv2][body] GET https://cloudbilling.googleapis.com/v1/projects/orbit-react-native/billingInfo {"name":"projects/orbit-react-native/billingInfo","projectId":"orbit-react-native","billingAccountName":"billingAccounts/01AF67-CEFB9B-8ED2C5","billingEnabled":true}
+[debug] [2025-01-13T06:44:22.822Z] [functions] found 1 new HTTP functions, testing setIamPolicy permission...
+[debug] [2025-01-13T06:44:22.822Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:22.822Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:22.822Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions [none]
+[debug] [2025-01-13T06:44:22.822Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions x-goog-quota-user=projects/orbit-react-native
+[debug] [2025-01-13T06:44:22.822Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions {"permissions":["cloudfunctions.functions.setIamPolicy"]}
+[debug] [2025-01-13T06:44:22.877Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions 200
+[debug] [2025-01-13T06:44:22.877Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/orbit-react-native:testIamPermissions {"permissions":["cloudfunctions.functions.setIamPolicy"]}
+[debug] [2025-01-13T06:44:22.877Z] [functions] found setIamPolicy permission, proceeding with deploy
+[debug] [2025-01-13T06:44:22.877Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:22.877Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:22.877Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2025-01-13T06:44:24.233Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2025-01-13T06:44:24.234Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-579445155029.us-central1.cloudfunctions.appspot.com/5f870d6f-5a70-423c-a503-90aae7ca6fe9.zip?GoogleAccessId=service-579445155029@gcf-admin-robot.iam.gserviceaccount.com&Expires=1736752464&Signature=gYySSWq21Z5W%2BbWLOUe7deNXdU1Ylk0IdeEmnz0KELwxultRmLcT14U5qIn2hQX5o664T1nGQwjB5ykdR7x4z3a2QJRLuRt5xTjCyxXp69P689U5%2FgxYfRhl4Xs3LUvAvZv73bcw8MWSZ5%2BN1p9X%2BMzL6XNo2XULv1i6QzNkgSJE6Lqn6imTrAwRlK5tHzf0NkCbdKK1SDShNN9Rh6XH%2FCdljh8SsO62w52Xc%2FODM9gdNx32cXkHkxmoefTy9HMYZDG8ApipKJK6yEVSxtAjlW0UDoQ4iD2tlN3oRQRo9iU%2BLo1TPn0wglQhqcfk8l54a0GEDLlKPXBfK2Tvxc2o6Q%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-579445155029.us-central1.cloudfunctions.appspot.com","object":"5f870d6f-5a70-423c-a503-90aae7ca6fe9.zip"}}
+[debug] [2025-01-13T06:44:24.235Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-579445155029.us-central1.cloudfunctions.appspot.com/5f870d6f-5a70-423c-a503-90aae7ca6fe9.zip GoogleAccessId=service-579445155029%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1736752464&Signature=gYySSWq21Z5W%2BbWLOUe7deNXdU1Ylk0IdeEmnz0KELwxultRmLcT14U5qIn2hQX5o664T1nGQwjB5ykdR7x4z3a2QJRLuRt5xTjCyxXp69P689U5%2FgxYfRhl4Xs3LUvAvZv73bcw8MWSZ5%2BN1p9X%2BMzL6XNo2XULv1i6QzNkgSJE6Lqn6imTrAwRlK5tHzf0NkCbdKK1SDShNN9Rh6XH%2FCdljh8SsO62w52Xc%2FODM9gdNx32cXkHkxmoefTy9HMYZDG8ApipKJK6yEVSxtAjlW0UDoQ4iD2tlN3oRQRo9iU%2BLo1TPn0wglQhqcfk8l54a0GEDLlKPXBfK2Tvxc2o6Q%3D%3D
+[debug] [2025-01-13T06:44:24.235Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-579445155029.us-central1.cloudfunctions.appspot.com/5f870d6f-5a70-423c-a503-90aae7ca6fe9.zip [stream]
+[debug] [2025-01-13T06:44:24.457Z] <<< [apiv2][status] PUT https://storage.googleapis.com/gcf-v2-uploads-579445155029.us-central1.cloudfunctions.appspot.com/5f870d6f-5a70-423c-a503-90aae7ca6fe9.zip 200
+[debug] [2025-01-13T06:44:24.457Z] <<< [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-579445155029.us-central1.cloudfunctions.appspot.com/5f870d6f-5a70-423c-a503-90aae7ca6fe9.zip [omitted]
+[info] ✔  functions: functions folder uploaded successfully 
+[info] i  functions: creating Node.js 18 (2nd Gen) function helloWorld(us-central1)... 
+[debug] [2025-01-13T06:44:24.459Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:24.459Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:24.459Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/functions functionId=helloWorld
+[debug] [2025-01-13T06:44:24.459Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/functions {"name":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","buildConfig":{"runtime":"nodejs18","entryPoint":"helloWorld","source":{"storageSource":{"bucket":"gcf-v2-uploads-579445155029.us-central1.cloudfunctions.appspot.com","object":"5f870d6f-5a70-423c-a503-90aae7ca6fe9.zip"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"orbit-react-native\",\"storageBucket\":\"orbit-react-native.firebasestorage.app\"}","GCLOUD_PROJECT":"orbit-react-native","EVENTARC_CLOUD_EVENT_SOURCE":"projects/orbit-react-native/locations/us-central1/services/helloWorld","FUNCTION_TARGET":"helloWorld"},"ingressSettings":null,"timeoutSeconds":null,"serviceAccountEmail":null,"availableMemory":"256Mi","minInstanceCount":null,"maxInstanceCount":null,"maxInstanceRequestConcurrency":80,"availableCpu":"1","vpcConnector":null,"vpcConnectorEgressSettings":null},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"ee51a7c287129220e6b24be235a0e5106a436081"}}
+[debug] [2025-01-13T06:44:25.791Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/functions 200
+[debug] [2025-01-13T06:44:25.791Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/functions {"name":"projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2025-01-13T06:44:25.885861777Z","target":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","verb":"create","cancelRequested":false,"apiVersion":"v2"},"done":false}
+[debug] [2025-01-13T06:44:25.791Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:25.792Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:25.792Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d [none]
+[debug] [2025-01-13T06:44:25.993Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d 200
+[debug] [2025-01-13T06:44:25.993Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d {"name":"projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2025-01-13T06:44:25.885861777Z","target":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","verb":"create","cancelRequested":false,"apiVersion":"v2"},"done":false}
+[debug] [2025-01-13T06:44:26.495Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2025-01-13T06:44:26.496Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:26.496Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:26.496Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d [none]
+[debug] [2025-01-13T06:44:26.705Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d 200
+[debug] [2025-01-13T06:44:26.705Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d {"name":"projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2025-01-13T06:44:25.885861777Z","target":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","verb":"create","cancelRequested":false,"apiVersion":"v2","requestResource":{"@type":"type.googleapis.com/google.cloud.functions.v2.Function","name":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","buildConfig":{"runtime":"nodejs18","entryPoint":"helloWorld","source":{"storageSource":{"bucket":"gcf-v2-sources-579445155029-us-central1","object":"helloWorld/function-source.zip","generation":"1736750665658346"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"serviceAccount":"projects/orbit-react-native/serviceAccounts/579445155029-compute@developer.gserviceaccount.com","automaticUpdatePolicy":{}},"serviceConfig":{"service":"projects/orbit-react-native/locations/us-central1/services/helloworld","timeoutSeconds":60,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"orbit-react-native\",\"storageBucket\":\"orbit-react-native.firebasestorage.app\"}","GCLOUD_PROJECT":"orbit-react-native","EVENTARC_CLOUD_EVENT_SOURCE":"projects/orbit-react-native/locations/us-central1/services/helloWorld","FUNCTION_TARGET":"helloWorld","LOG_EXECUTION_ID":"true"},"ingressSettings":"ALLOW_ALL","serviceAccountEmail":"579445155029-compute@developer.gserviceaccount.com","availableMemory":"256Mi","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"ee51a7c287129220e6b24be235a0e5106a436081"},"environment":"GEN_2"},"stages":[{"name":"BUILD","state":"NOT_STARTED"},{"name":"SERVICE","state":"NOT_STARTED"}],"operationType":"CREATE_FUNCTION"},"done":false}
+[debug] [2025-01-13T06:44:27.705Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2025-01-13T06:44:27.706Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:27.706Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:27.706Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d [none]
+[debug] [2025-01-13T06:44:27.885Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d 200
+[debug] [2025-01-13T06:44:27.885Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d {"name":"projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2025-01-13T06:44:25.885861777Z","target":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","verb":"create","cancelRequested":false,"apiVersion":"v2","requestResource":{"@type":"type.googleapis.com/google.cloud.functions.v2.Function","name":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","buildConfig":{"runtime":"nodejs18","entryPoint":"helloWorld","source":{"storageSource":{"bucket":"gcf-v2-sources-579445155029-us-central1","object":"helloWorld/function-source.zip","generation":"1736750665658346"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"serviceAccount":"projects/orbit-react-native/serviceAccounts/579445155029-compute@developer.gserviceaccount.com","automaticUpdatePolicy":{}},"serviceConfig":{"service":"projects/orbit-react-native/locations/us-central1/services/helloworld","timeoutSeconds":60,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"orbit-react-native\",\"storageBucket\":\"orbit-react-native.firebasestorage.app\"}","GCLOUD_PROJECT":"orbit-react-native","EVENTARC_CLOUD_EVENT_SOURCE":"projects/orbit-react-native/locations/us-central1/services/helloWorld","FUNCTION_TARGET":"helloWorld","LOG_EXECUTION_ID":"true"},"ingressSettings":"ALLOW_ALL","serviceAccountEmail":"579445155029-compute@developer.gserviceaccount.com","availableMemory":"256Mi","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"ee51a7c287129220e6b24be235a0e5106a436081"},"environment":"GEN_2"},"stages":[{"name":"BUILD","state":"NOT_STARTED"},{"name":"SERVICE","state":"NOT_STARTED"}],"operationType":"CREATE_FUNCTION"},"done":false}
+[debug] [2025-01-13T06:44:29.887Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2025-01-13T06:44:29.887Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:29.888Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:29.888Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d [none]
+[debug] [2025-01-13T06:44:30.092Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d 200
+[debug] [2025-01-13T06:44:30.092Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d {"name":"projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2025-01-13T06:44:25.885861777Z","target":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","verb":"create","cancelRequested":false,"apiVersion":"v2","requestResource":{"@type":"type.googleapis.com/google.cloud.functions.v2.Function","name":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","buildConfig":{"runtime":"nodejs18","entryPoint":"helloWorld","source":{"storageSource":{"bucket":"gcf-v2-sources-579445155029-us-central1","object":"helloWorld/function-source.zip","generation":"1736750665658346"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"serviceAccount":"projects/orbit-react-native/serviceAccounts/579445155029-compute@developer.gserviceaccount.com","automaticUpdatePolicy":{}},"serviceConfig":{"service":"projects/orbit-react-native/locations/us-central1/services/helloworld","timeoutSeconds":60,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"orbit-react-native\",\"storageBucket\":\"orbit-react-native.firebasestorage.app\"}","GCLOUD_PROJECT":"orbit-react-native","EVENTARC_CLOUD_EVENT_SOURCE":"projects/orbit-react-native/locations/us-central1/services/helloWorld","FUNCTION_TARGET":"helloWorld","LOG_EXECUTION_ID":"true"},"ingressSettings":"ALLOW_ALL","serviceAccountEmail":"579445155029-compute@developer.gserviceaccount.com","availableMemory":"256Mi","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"ee51a7c287129220e6b24be235a0e5106a436081"},"environment":"GEN_2"},"stages":[{"name":"BUILD","state":"NOT_STARTED"},{"name":"SERVICE","state":"NOT_STARTED"}],"operationType":"CREATE_FUNCTION"},"done":false}
+[debug] [2025-01-13T06:44:34.094Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2025-01-13T06:44:34.094Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:34.095Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:34.095Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d [none]
+[debug] [2025-01-13T06:44:34.298Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d 200
+[debug] [2025-01-13T06:44:34.298Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d {"name":"projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2025-01-13T06:44:25.885861777Z","target":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","verb":"create","cancelRequested":false,"apiVersion":"v2","requestResource":{"@type":"type.googleapis.com/google.cloud.functions.v2.Function","name":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","buildConfig":{"runtime":"nodejs18","entryPoint":"helloWorld","source":{"storageSource":{"bucket":"gcf-v2-sources-579445155029-us-central1","object":"helloWorld/function-source.zip","generation":"1736750665658346"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"serviceAccount":"projects/orbit-react-native/serviceAccounts/579445155029-compute@developer.gserviceaccount.com","automaticUpdatePolicy":{}},"serviceConfig":{"service":"projects/orbit-react-native/locations/us-central1/services/helloworld","timeoutSeconds":60,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"orbit-react-native\",\"storageBucket\":\"orbit-react-native.firebasestorage.app\"}","GCLOUD_PROJECT":"orbit-react-native","EVENTARC_CLOUD_EVENT_SOURCE":"projects/orbit-react-native/locations/us-central1/services/helloWorld","FUNCTION_TARGET":"helloWorld","LOG_EXECUTION_ID":"true"},"ingressSettings":"ALLOW_ALL","serviceAccountEmail":"579445155029-compute@developer.gserviceaccount.com","availableMemory":"256Mi","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"ee51a7c287129220e6b24be235a0e5106a436081"},"environment":"GEN_2"},"stages":[{"name":"BUILD","state":"NOT_STARTED"},{"name":"SERVICE","state":"NOT_STARTED"}],"operationType":"CREATE_FUNCTION"},"done":false}
+[debug] [2025-01-13T06:44:42.301Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2025-01-13T06:44:42.301Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:42.302Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:42.302Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d [none]
+[debug] [2025-01-13T06:44:42.556Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d 200
+[debug] [2025-01-13T06:44:42.556Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d {"name":"projects/orbit-react-native/locations/us-central1/operations/operation-1736750664774-62b90c66ff2dc-ada795e6-94f32d1d","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2025-01-13T06:44:25.885861777Z","endTime":"2025-01-13T06:44:38.615519004Z","target":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","verb":"create","cancelRequested":false,"apiVersion":"v2","requestResource":{"@type":"type.googleapis.com/google.cloud.functions.v2.Function","name":"projects/orbit-react-native/locations/us-central1/functions/helloWorld","buildConfig":{"runtime":"nodejs18","entryPoint":"helloWorld","source":{"storageSource":{"bucket":"gcf-v2-sources-579445155029-us-central1","object":"helloWorld/function-source.zip","generation":"1736750665658346"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"serviceAccount":"projects/orbit-react-native/serviceAccounts/579445155029-compute@developer.gserviceaccount.com","automaticUpdatePolicy":{}},"serviceConfig":{"service":"projects/orbit-react-native/locations/us-central1/services/helloworld","timeoutSeconds":60,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"orbit-react-native\",\"storageBucket\":\"orbit-react-native.firebasestorage.app\"}","GCLOUD_PROJECT":"orbit-react-native","EVENTARC_CLOUD_EVENT_SOURCE":"projects/orbit-react-native/locations/us-central1/services/helloWorld","FUNCTION_TARGET":"helloWorld","LOG_EXECUTION_ID":"true"},"ingressSettings":"ALLOW_ALL","serviceAccountEmail":"579445155029-compute@developer.gserviceaccount.com","availableMemory":"256Mi","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"ee51a7c287129220e6b24be235a0e5106a436081"},"environment":"GEN_2"},"stages":[{"name":"ARTIFACT_REGISTRY","message":"Deleting function artifacts in Artifact Registry","state":"COMPLETE"},{"name":"SERVICE","message":"Deleting Cloud Run service","state":"COMPLETE","resource":"projects/orbit-react-native/locations/us-central1/services/helloworld"}],"operationType":"CREATE_FUNCTION"},"done":true,"error":{"code":13,"message":"Could not build the function. "}}
+[debug] [2025-01-13T06:44:42.556Z] Got source token undefined for region us-central1
+[error] Could not build the function. 
+[debug] [2025-01-13T06:44:42.559Z] Total Function Deployment time: 18100
+[debug] [2025-01-13T06:44:42.559Z] 1 Functions Deployed
+[debug] [2025-01-13T06:44:42.559Z] 1 Functions Errored
+[debug] [2025-01-13T06:44:42.559Z] 0 Function Deployments Aborted
+[debug] [2025-01-13T06:44:42.559Z] Average Function Deployment time: 18099
+[info] 
+[info] Functions deploy had errors with the following functions:
+	helloWorld(us-central1)
+[debug] [2025-01-13T06:44:42.560Z] Not printing URL for HTTPS function. Typically this means it didn't match a filter or we failed deployment
+[info] i  functions: cleaning up build files... 
+[debug] [2025-01-13T06:44:42.561Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:42.561Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:42.562Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:42.562Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:42.562Z] >>> [apiv2][query] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/orbit-react-native/locations/us-central1/repositories/gcf-artifacts/packages/hello_world [none]
+[debug] [2025-01-13T06:44:42.566Z] >>> [apiv2][query] GET https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list [none]
+[debug] [2025-01-13T06:44:42.839Z] <<< [apiv2][status] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/orbit-react-native/locations/us-central1/repositories/gcf-artifacts/packages/hello_world 404
+[debug] [2025-01-13T06:44:42.840Z] <<< [apiv2][body] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/orbit-react-native/locations/us-central1/repositories/gcf-artifacts/packages/hello_world {"error":{"code":404,"message":"Package \"projects/orbit-react-native/locations/us-central1/repositories/gcf-artifacts/packages/hello_world\" was not found.","status":"NOT_FOUND"}}
+[debug] [2025-01-13T06:44:43.383Z] <<< [apiv2][status] GET https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list 404
+[debug] [2025-01-13T06:44:43.383Z] <<< [apiv2][body] GET https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2025-01-13T06:44:43.384Z] Failed docker command with error  Request to https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list had HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"Request to https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list had HTTP Error: 404, Not Found","status":404}
+[debug] [2025-01-13T06:44:43.385Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:43.385Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:43.385Z] >>> [apiv2][query] GET https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list [none]
+[debug] [2025-01-13T06:44:43.539Z] <<< [apiv2][status] GET https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list 404
+[debug] [2025-01-13T06:44:43.539Z] <<< [apiv2][body] GET https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2025-01-13T06:44:43.539Z] Failed docker command with error  Request to https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list had HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"Request to https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list had HTTP Error: 404, Not Found","status":404}
+[debug] [2025-01-13T06:44:43.640Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:43.641Z] Checked if tokens are valid: true, expires at: 1736754081042
+[debug] [2025-01-13T06:44:43.641Z] >>> [apiv2][query] GET https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list [none]
+[debug] [2025-01-13T06:44:43.781Z] <<< [apiv2][status] GET https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list 404
+[debug] [2025-01-13T06:44:43.781Z] <<< [apiv2][body] GET https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2025-01-13T06:44:43.781Z] Failed docker command with error  Request to https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list had HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"Request to https://us.gcr.io/v2/orbit-react-native/gcf/us-central1/tags/list had HTTP Error: 404, Not Found","status":404}
+[warn] ⚠  functions: Unhandled error cleaning up build images. This could result in a small monthly bill if not corrected. You can attempt to delete these images by redeploying or you can delete them manually at https://console.cloud.google.com/gcr/images/orbit-react-native/us/gcf 
+[debug] [2025-01-13T06:44:43.781Z] Functions deploy failed.
+[debug] [2025-01-13T06:44:43.781Z] {
+  "endpoint": {
+    "id": "helloWorld",
+    "project": "orbit-react-native",
+    "region": "us-central1",
+    "entryPoint": "helloWorld",
+    "platform": "gcfv2",
+    "runtime": "nodejs18",
+    "httpsTrigger": {},
+    "labels": {
+      "deployment-tool": "cli-firebase"
+    },
+    "ingressSettings": null,
+    "availableMemoryMb": null,
+    "serviceAccount": null,
+    "timeoutSeconds": null,
+    "maxInstances": null,
+    "minInstances": null,
+    "concurrency": 80,
+    "vpc": null,
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"orbit-react-native\",\"storageBucket\":\"orbit-react-native.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "orbit-react-native",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/orbit-react-native/locations/us-central1/services/helloWorld"
+    },
+    "codebase": "default",
+    "cpu": 1,
+    "targetedByOnly": false,
+    "hash": "ee51a7c287129220e6b24be235a0e5106a436081"
+  },
+  "op": "create",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "exit": 1,
+    "message": "Could not build the function. ",
+    "original": {
+      "code": 13,
+      "message": "Could not build the function. "
+    },
+    "status": 13,
+    "code": 13
+  }
+}
+[debug] [2025-01-13T06:44:43.782Z] Error: Failed to create function helloWorld in region us-central1
+    at /Users/bobbywang/.nvm/versions/node/v20.18.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:294:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Fabricator.createV2Function (/Users/bobbywang/.nvm/versions/node/v20.18.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:278:30)
+    at async Fabricator.createEndpoint (/Users/bobbywang/.nvm/versions/node/v20.18.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:137:13)
+    at async handle (/Users/bobbywang/.nvm/versions/node/v20.18.0/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:89:17)
+[error] 
+[error] Error: There was an error deploying functions
